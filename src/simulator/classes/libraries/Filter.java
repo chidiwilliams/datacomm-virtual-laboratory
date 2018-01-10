@@ -162,8 +162,7 @@ public class Filter
         int n;
         double mm;
 
-        for (n = 0; n < m_num_taps; n++)
-        {
+        for (n = 0; n < m_num_taps; n++) {
             mm = n - (m_num_taps - 1.0) / 2.0;
             if (mm == 0.0)
                 m_taps[n] = 1.0 - m_lambda / Math.PI;

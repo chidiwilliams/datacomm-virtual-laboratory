@@ -30,7 +30,7 @@ public class LineChart extends ApplicationFrame {
         
         panelWidth = width;
         panelHeight = height;
-        makeChart("", null, "", "", 0, 0, lineChartType.DEFAULT);
+        makeChart("", null, "", "", -1, -1, lineChartType.DEFAULT, -1);
     }
     
     private final int panelWidth;
@@ -38,7 +38,7 @@ public class LineChart extends ApplicationFrame {
     
     private void makeChart(String chartTitle, XYDataset dataset, 
             String xlabel, String ylabel, double xTickUnits, 
-            double yTickUnits, lineChartType chartType) {
+            double yTickUnits, lineChartType chartType, double xLowerBound) {
         
         JFreeChart lineChart = ChartFactory.createXYLineChart(
             chartTitle,
@@ -52,13 +52,22 @@ public class LineChart extends ApplicationFrame {
         plot.setDomainCrosshairVisible(true);
         plot.setRangeCrosshairVisible(true);
         
-        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        rangeAxis.setTickUnit(new NumberTickUnit(yTickUnits));
-        rangeAxis.setTickMarksVisible(true);
+        if (xTickUnits > -1) {
+            NumberAxis categoryAxis = (NumberAxis) plot.getDomainAxis();
+            categoryAxis.setTickUnit(new NumberTickUnit(xTickUnits));
+            categoryAxis.setTickMarksVisible(true);    
+        }
         
-        NumberAxis categoryAxis = (NumberAxis) plot.getDomainAxis();
-        categoryAxis.setTickUnit(new NumberTickUnit(xTickUnits));
-        rangeAxis.setTickMarksVisible(true);
+        if (yTickUnits > -1) {
+            NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+            rangeAxis.setTickUnit(new NumberTickUnit(yTickUnits));
+            rangeAxis.setTickMarksVisible(true);
+        }
+        
+        if (xLowerBound > -1) {
+            NumberAxis categoryAxis = (NumberAxis) plot.getDomainAxis();
+            categoryAxis.setLowerBound(xLowerBound);
+        }
         
         if (chartType == lineChartType.POINTS) {
             XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -74,7 +83,7 @@ public class LineChart extends ApplicationFrame {
     
     public void sendData(String chartTitle, double[] x, double[] y, 
             String xlabel, String ylabel, double xTickUnits, double yTickUnits, 
-            lineChartType chartType) {
+            lineChartType chartType, double xLowerBound) {
         if (x.length != y.length) {
             throw new IllegalArgumentException("x and y arrays must have equal lengths.");
         }
@@ -88,7 +97,7 @@ public class LineChart extends ApplicationFrame {
         final XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(samples);
         
-        makeChart(chartTitle, dataset, xlabel, ylabel, xTickUnits, yTickUnits, chartType);
+        makeChart(chartTitle, dataset, xlabel, ylabel, xTickUnits, yTickUnits, chartType, xLowerBound);
     }
     
     public static void main(String[] args) {

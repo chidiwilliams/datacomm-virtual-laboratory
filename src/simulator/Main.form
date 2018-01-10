@@ -186,9 +186,9 @@
                                               <EmptySpace min="35" max="32767" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <Component id="filterTapsTextField" min="-2" pref="68" max="-2" attributes="0"/>
+                                                      <Component id="filterCutoffFreqLowTextField" min="-2" pref="68" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                                                      <Component id="filterCutoffFreqTextField" min="-2" pref="68" max="-2" attributes="0"/>
+                                                      <Component id="filterCutoffFreqHighTextField" min="-2" pref="68" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Component id="filterTypeComboBox" max="32767" attributes="0"/>
                                               </Group>
@@ -219,8 +219,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="impairmentPowerLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="filterCutoffFreqTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="filterTapsTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="filterCutoffFreqHighTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="filterCutoffFreqLowTextField" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="filteringWarningLabel" min="-2" max="-2" attributes="0"/>
@@ -261,11 +261,16 @@
                       <Font name="Dialog" size="14" style="1"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="1">
+                      <StringArray count="3">
                         <StringItem index="0" value="Low Pass"/>
+                        <StringItem index="1" value="High Pass"/>
+                        <StringItem index="2" value="Band Pass"/>
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterTypeComboBoxActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -281,7 +286,7 @@
                     <Property name="text" type="java.lang.String" value="Cutoff Frequency"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="filterCutoffFreqTextField">
+                <Component class="javax.swing.JTextField" name="filterCutoffFreqHighTextField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="18" style="1"/>
@@ -311,7 +316,7 @@
                     <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="filterTapsTextField">
+                <Component class="javax.swing.JTextField" name="filterCutoffFreqLowTextField">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="18" style="1"/>
@@ -420,16 +425,15 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="thresholdWarningLabel" min="-2" pref="280" max="-2" attributes="0"/>
+                              <Component id="impairmentLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="impairmentLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="89" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="39" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                   <Component id="thresholdButton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="timeDomainButton2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="decodeButton" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="successLabel" alignment="0" min="-2" pref="297" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -440,11 +444,15 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="impairmentLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="thresholdWarningLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="thresholdButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="timeDomainButton2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                              <Component id="decodeButton" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="successLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -475,13 +483,38 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="thresholdButtonActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="timeDomainButton2">
+                <Component class="javax.swing.JButton" name="decodeButton">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="16" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Decode"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="decodeButtonActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="thresholdWarningLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="16" style="0"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value=" "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="successLabel">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="16" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value=" "/>
                   </Properties>
                 </Component>
               </SubComponents>

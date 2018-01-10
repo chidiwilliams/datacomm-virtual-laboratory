@@ -5,14 +5,17 @@
  */
 package simulator;
 
+import java.util.Arrays;
 import simulator.classes.impairments.AWGN;
 import simulator.classes.codingSchemes.Hamming;
 import simulator.classes.signals.*;
 import simulator.classes.modulations.BPSK;
 import simulator.classes.charts.*;
+import simulator.classes.filters.LPF;
+import simulator.classes.filters.BPF;
+import simulator.classes.filters.HPF;
 import simulator.classes.libraries.SignalFFT;
 import simulator.classes.libraries.ArrayFunctions;
-import simulator.classes.filters.LPF;
 
 /**
  *
@@ -43,10 +46,10 @@ public class Main extends javax.swing.JFrame {
         impairmentPowerLabel1 = new javax.swing.JLabel();
         filterTypeComboBox = new javax.swing.JComboBox<>();
         impairmentPowerLabel2 = new javax.swing.JLabel();
-        filterCutoffFreqTextField = new javax.swing.JTextField();
+        filterCutoffFreqHighTextField = new javax.swing.JTextField();
         filterButton = new javax.swing.JButton();
         filteringWarningLabel = new javax.swing.JLabel();
-        filterTapsTextField = new javax.swing.JTextField();
+        filterCutoffFreqLowTextField = new javax.swing.JTextField();
         filterPanel = new javax.swing.JPanel();
         inputMessageLabel6 = new javax.swing.JLabel();
         demodulateButton = new javax.swing.JButton();
@@ -54,7 +57,9 @@ public class Main extends javax.swing.JFrame {
         domainPanel = new javax.swing.JPanel();
         impairmentLabel2 = new javax.swing.JLabel();
         thresholdButton = new javax.swing.JButton();
-        timeDomainButton2 = new javax.swing.JButton();
+        decodeButton = new javax.swing.JButton();
+        thresholdWarningLabel = new javax.swing.JLabel();
+        successLabel = new javax.swing.JLabel();
         impairmentPanel = new javax.swing.JPanel();
         impairmentLabel = new javax.swing.JLabel();
         impairmentPowerLabel = new javax.swing.JLabel();
@@ -124,14 +129,19 @@ public class Main extends javax.swing.JFrame {
         impairmentPowerLabel1.setText("Type of Filter");
 
         filterTypeComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        filterTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Low Pass" }));
+        filterTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Low Pass", "High Pass", "Band Pass" }));
+        filterTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterTypeComboBoxActionPerformed(evt);
+            }
+        });
 
         impairmentPowerLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         impairmentPowerLabel2.setForeground(new java.awt.Color(0, 0, 0));
         impairmentPowerLabel2.setText("Cutoff Frequency");
 
-        filterCutoffFreqTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        filterCutoffFreqTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        filterCutoffFreqHighTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        filterCutoffFreqHighTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         filterButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         filterButton.setText("Filter");
@@ -145,9 +155,9 @@ public class Main extends javax.swing.JFrame {
         filteringWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         filteringWarningLabel.setText(" ");
 
-        filterTapsTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        filterTapsTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        filterTapsTextField.setEnabled(false);
+        filterCutoffFreqLowTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        filterCutoffFreqLowTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        filterCutoffFreqLowTextField.setEnabled(false);
 
         javax.swing.GroupLayout decodePanelLayout = new javax.swing.GroupLayout(decodePanel);
         decodePanel.setLayout(decodePanelLayout);
@@ -172,9 +182,9 @@ public class Main extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(decodePanelLayout.createSequentialGroup()
-                                            .addComponent(filterTapsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(filterCutoffFreqTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(filterTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(decodePanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,8 +204,8 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(impairmentPowerLabel2)
-                    .addComponent(filterCutoffFreqTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterTapsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filteringWarningLabel)
                 .addGap(10, 10, 10)
@@ -268,9 +278,22 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        timeDomainButton2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        timeDomainButton2.setText("Decode");
-        timeDomainButton2.setToolTipText("");
+        decodeButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        decodeButton.setText("Decode");
+        decodeButton.setToolTipText("");
+        decodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decodeButtonActionPerformed(evt);
+            }
+        });
+
+        thresholdWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        thresholdWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
+        thresholdWarningLabel.setText(" ");
+
+        successLabel.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        successLabel.setForeground(new java.awt.Color(0, 0, 0));
+        successLabel.setText(" ");
 
         javax.swing.GroupLayout domainPanelLayout = new javax.swing.GroupLayout(domainPanel);
         domainPanel.setLayout(domainPanelLayout);
@@ -279,14 +302,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(domainPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(domainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(thresholdWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(impairmentLabel2)
                     .addGroup(domainPanelLayout.createSequentialGroup()
-                        .addComponent(impairmentLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, domainPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
                         .addComponent(thresholdButton)
                         .addGap(18, 18, 18)
-                        .addComponent(timeDomainButton2)))
+                        .addComponent(decodeButton))
+                    .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         domainPanelLayout.setVerticalGroup(
@@ -294,10 +317,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(domainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(impairmentLabel2)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(thresholdWarningLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(domainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(thresholdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeDomainButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(decodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(successLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -752,13 +779,14 @@ public class Main extends javax.swing.JFrame {
 //          PLOT SAMPLES
             oscilloscope.sendData(
                     "Input bits", 
-                    new double[]{0, 1, 2, 3}, 
+                    new double[]{1, 2, 3, 4}, 
                     inputSignal.getSignal(), 
                     bitsXLabel, 
                     oscilloscopeYLabel, 
                     1, 
                     1,
-                    lineChartType.POINTS);
+                    lineChartType.POINTS,
+                    0.5);
             oscilloscope.pack();
             
             spectrometer.sendData(
@@ -769,22 +797,9 @@ public class Main extends javax.swing.JFrame {
                     "",
                     0,
                     0,
-                    lineChartType.DEFAULT
-            );
+                    lineChartType.DEFAULT,
+                    -1);
             spectrometer.pack();
-                        
-//          INPUT BITS MAY NOT REQUIRE SPECTROMETER !!!
-//            SignalFFT inputFFT = new SignalFFT(samplingFrequency, inputSignal.getSignal());
-//            spectrometer.sendData(
-//                    "Input bits", 
-//                    inputFFT.getFrequencies(), 
-//                    inputFFT.getSingleSidedSpectrum(), 
-//                    spectrometerXLabel, 
-//                    spectrometerYLabel, 
-//                    spectrometerXTickUnits, 
-//                    spectrometerYTickUnits,
-//                    lineChartType.DEFAULT);
-//            spectrometer.pack();
         }
     }//GEN-LAST:event_sendInputButtonActionPerformed
 
@@ -823,7 +838,8 @@ public class Main extends javax.swing.JFrame {
                     oscilloscopeYLabel, 
                     oscilloscopeXTickUnits, 
                     oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             oscilloscope.pack();
             
             SignalFFT messageFFT = new SignalFFT(samplingFrequency, messageSignal.getSignal());
@@ -835,7 +851,8 @@ public class Main extends javax.swing.JFrame {
                     spectrometerYLabel, 
                     spectrometerXTickUnits, 
                     spectrometerYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_encodeAndSampleButtonActionPerformed
@@ -855,7 +872,8 @@ public class Main extends javax.swing.JFrame {
                     oscilloscopeYLabel, 
                     oscilloscopeXTickUnits, 
                     oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             oscilloscope.pack();
             
             SignalFFT carrierFFT = new SignalFFT(samplingFrequency, carrierSignal.getSignal());
@@ -867,7 +885,8 @@ public class Main extends javax.swing.JFrame {
                     spectrometerYLabel, 
                     spectrometerXTickUnits, 
                     spectrometerYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_carrierButtonActionPerformed
@@ -895,7 +914,8 @@ public class Main extends javax.swing.JFrame {
                     oscilloscopeYLabel, 
                     oscilloscopeXTickUnits, 
                     oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             oscilloscope.pack();
             
             SignalFFT modulatedFFT = new SignalFFT(samplingFrequency, modulatedSignal.getSignal());
@@ -907,7 +927,8 @@ public class Main extends javax.swing.JFrame {
                     spectrometerYLabel, 
                     spectrometerXTickUnits, 
                     spectrometerYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_modulateButtonActionPerformed
@@ -936,7 +957,8 @@ public class Main extends javax.swing.JFrame {
                     oscilloscopeYLabel, 
                     oscilloscopeXTickUnits, 
                     oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             oscilloscope.pack();
             
             SignalFFT receivedFFT = new SignalFFT(samplingFrequency, receivedSignal.getSignal());
@@ -948,7 +970,8 @@ public class Main extends javax.swing.JFrame {
                     spectrometerYLabel, 
                     spectrometerXTickUnits, 
                     spectrometerYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             spectrometer.pack();
         }
         
@@ -958,6 +981,7 @@ public class Main extends javax.swing.JFrame {
         if (validateDemodulation()) {
             demodulatedSignal = new Signal(getSampleNumber());
             demodulatedSignal.setSignal(BPSKmodulation.getDemodulated(receivedSignal.getSignal()));
+            System.out.println(Arrays.toString(demodulatedSignal.getSignal()));
             
 //          PLOT SAMPLES
             oscilloscope.sendData(
@@ -968,7 +992,8 @@ public class Main extends javax.swing.JFrame {
                     oscilloscopeYLabel, 
                     oscilloscopeXTickUnits, 
                     oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             oscilloscope.pack();
 
             SignalFFT demodulatedFFT = new SignalFFT(samplingFrequency, demodulatedSignal.getSignal());
@@ -980,7 +1005,8 @@ public class Main extends javax.swing.JFrame {
                     spectrometerYLabel, 
                     spectrometerXTickUnits, 
                     spectrometerYTickUnits, 
-                    lineChartType.DEFAULT);
+                    lineChartType.DEFAULT,
+                    -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_demodulateButtonActionPerformed
@@ -990,47 +1016,161 @@ public class Main extends javax.swing.JFrame {
             
             String filterType = filterTypeComboBox.getSelectedItem().toString();
             
-            if ("Low Pass".equals(filterType)) {
-                double cutoffFreq = Double.parseDouble(filterCutoffFreqTextField.getText());
-                                
-                lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
-                double[] filtered = lpFilter.getFiltered();
-//              double[] filtered_ampd = ArrayFunctions.setMaxAmplitude(filtered, 1);
-                
-                filteredSignal = new Signal(getSampleNumber());
-                filteredSignal.setSignal(filtered);
-//              filteredSignal.setSignal(filtered_ampd);
-                
-//              PLOT SAMPLES
-                oscilloscope.sendData(
-                    "Filtered signal", 
-                    samplingIntervals, 
-                    filteredSignal.getSignal(), 
-                    oscilloscopeXLabel, 
-                    oscilloscopeYLabel, 
-                    oscilloscopeXTickUnits, 
-                    oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT);
-                oscilloscope.pack();
-                
-                SignalFFT filteredFFT = new SignalFFT(samplingFrequency, filteredSignal.getSignal());
-                spectrometer.sendData(
-                    "Filtered signal", 
-                    filteredFFT.getFrequenciesToMax(100), 
-                    filteredFFT.getSingleSidedSpectrumToMax(100), 
-                    spectrometerXLabel, 
-                    spectrometerYLabel, 
-                    spectrometerXTickUnits, 
-                    spectrometerYTickUnits, 
-                    lineChartType.DEFAULT);
-                spectrometer.pack();
+            filtered = new double[getSampleNumber()];
+            
+            switch (filterType) {
+               case "Low Pass":
+                   {
+                       double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                       lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
+                       filtered = lpFilter.getFiltered();
+                       break;
+                   }
+               case "High Pass":
+                   {
+                       double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                       hpFilter = new HPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
+                       filtered = hpFilter.getFiltered();
+                       break;
+                   }
+               case "Band Pass":
+                    {
+                        double cutoffFreqLow = Double.parseDouble(filterCutoffFreqLowTextField.getText());
+                        double cutoffFreqHigh = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                        bpFilter = new BPF(samplingFrequency, cutoffFreqLow, cutoffFreqHigh, demodulatedSignal.getSignal());
+                        filtered = bpFilter.getFiltered();
+                        break;
+                    }
+               default:
+                   {
+                       double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                       lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
+                       filtered = lpFilter.getFiltered();
+                       break;
+                   }
             }
+            
+            filteredSignal = new Signal(getSampleNumber());
+            filteredSignal.setSignal(filtered);
+
+//              PLOT SAMPLES
+            oscilloscope.sendData(
+                "Filtered signal", 
+                samplingIntervals, 
+                filteredSignal.getSignal(), 
+                oscilloscopeXLabel, 
+                oscilloscopeYLabel, 
+                oscilloscopeXTickUnits, 
+                oscilloscopeYTickUnits, 
+                lineChartType.DEFAULT,
+                -1);
+            oscilloscope.pack();
+
+            SignalFFT filteredFFT = new SignalFFT(samplingFrequency, filteredSignal.getSignal());
+            spectrometer.sendData(
+                "Filtered signal", 
+                filteredFFT.getFrequenciesToMax(100), 
+                filteredFFT.getSingleSidedSpectrumToMax(100), 
+                spectrometerXLabel, 
+                spectrometerYLabel, 
+                spectrometerXTickUnits, 
+                spectrometerYTickUnits, 
+                lineChartType.DEFAULT,
+                -1);
+            spectrometer.pack();
         }
     }//GEN-LAST:event_filterButtonActionPerformed
 
     private void thresholdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thresholdButtonActionPerformed
-        
+        if (validateThreshold()) { 
+            thresholdSignal = new Signal(8);
+            thresholdSignal.setSignal(filteredSignal.getThresholds(8));
+            
+//          PLOT SAMPLES
+            oscilloscope.sendData(
+                    "Threshold bits",
+                    new double[]{1, 2, 3, 4, 5, 6, 7, 8}, 
+                    thresholdSignal.getSignal(), 
+                    bitsXLabel, 
+                    oscilloscopeYLabel, 
+                    1, 
+                    1, 
+                    lineChartType.POINTS,
+                    0.05);
+            oscilloscope.pack();
+            
+            spectrometer.sendData(
+                    "",
+                    new double[0],
+                    new double[0],
+                    "",
+                    "",
+                    0,
+                    0,
+                    lineChartType.DEFAULT,
+                    -1);
+            spectrometer.pack();
+        }
     }//GEN-LAST:event_thresholdButtonActionPerformed
+
+    private void decodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decodeButtonActionPerformed
+        if (validateDecoding()) {
+//          REMOVE PARITY BIT
+            Signal thresholdLessParitySignal = new Signal(7);
+            for (int i = 0; i < thresholdLessParitySignal.getLength(); i++) {
+                thresholdLessParitySignal.setSignalValue(i, thresholdSignal.getSignalValue(i));
+            }
+            
+            Hamming hamming = new Hamming();
+            int errorBit = hamming.syndromeNum(thresholdLessParitySignal.getSignal());
+            
+            if (errorBit > -1) {
+                successLabel.setText("Corrected error at bit " + (errorBit + 1) + "");
+            } else {
+                successLabel.setText("Error free transmission.");
+            }
+            
+            decodedSignal = new Signal(4);
+            decodedSignal.setSignal(hamming.decode(thresholdLessParitySignal.getSignal()));
+            
+//          PLOT SAMPLES
+            oscilloscope.sendData(
+                    "Decoded bits",
+                    new double[]{1, 2, 3, 4}, 
+                    decodedSignal.getSignal(), 
+                    bitsXLabel, 
+                    oscilloscopeYLabel, 
+                    1, 
+                    1, 
+                    lineChartType.POINTS,
+                    0.75);
+            oscilloscope.pack();
+            
+            spectrometer.sendData(
+                    "",
+                    new double[0],
+                    new double[0],
+                    "",
+                    "",
+                    0,
+                    0,
+                    lineChartType.DEFAULT,
+                    -1);
+            spectrometer.pack();
+        }
+    }//GEN-LAST:event_decodeButtonActionPerformed
+
+    private void filterTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTypeComboBoxActionPerformed
+        String filterType = filterTypeComboBox.getSelectedItem().toString();
+        switch(filterType) {
+            case("Band Pass"):
+                filterCutoffFreqLowTextField.setEnabled(true);
+                break;
+            default:
+                filterCutoffFreqLowTextField.setEnabled(false);
+                break;
+        }
+    }//GEN-LAST:event_filterTypeComboBoxActionPerformed
 
     private boolean validateInput() {
         try {
@@ -1118,12 +1258,28 @@ public class Main extends javax.swing.JFrame {
             return false;
         }
         try {
-            Double.parseDouble(filterCutoffFreqTextField.getText());
+            Double.parseDouble(filterCutoffFreqHighTextField.getText());
         } catch (NumberFormatException e) {
-            impairmentWarningLabel.setText("Please input a valid filter cutoff frequency.");
+            filteringWarningLabel.setText("Please input a valid filter cutoff frequency.");
             return false;
         }
         filteringWarningLabel.setText(" ");
+        return true;
+    }
+    
+    private boolean validateThreshold() {
+        if (filteredSignal == null) {
+            thresholdWarningLabel.setText("Please perform filtering.");
+        }
+        thresholdWarningLabel.setText(" ");
+        return true;
+    }
+    
+    private boolean validateDecoding() {
+        if (thresholdSignal == null) {
+            thresholdWarningLabel.setText("Please perform thresholding.");
+        }
+        thresholdWarningLabel.setText(" ");
         return true;
     }
     
@@ -1182,6 +1338,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel codingSchemeLabel;
     private javax.swing.JLabel codingSchemeLabel1;
     private javax.swing.JLabel codingSchemeLabel2;
+    private javax.swing.JButton decodeButton;
     private javax.swing.JPanel decodePanel;
     private javax.swing.JButton demodulateButton;
     private javax.swing.JLabel demodulationWarningLabel;
@@ -1189,9 +1346,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton encodeAndSampleButton;
     private javax.swing.JLabel encodeWarningLabel;
     private javax.swing.JButton filterButton;
-    private javax.swing.JTextField filterCutoffFreqTextField;
+    private javax.swing.JTextField filterCutoffFreqHighTextField;
+    private javax.swing.JTextField filterCutoffFreqLowTextField;
     private javax.swing.JPanel filterPanel;
-    private javax.swing.JTextField filterTapsTextField;
     private javax.swing.JComboBox<String> filterTypeComboBox;
     private javax.swing.JLabel filteringWarningLabel;
     private javax.swing.JButton impairmentButton;
@@ -1226,8 +1383,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sampleNoComboBox;
     private javax.swing.JLabel sampleNoLabel;
     private javax.swing.JButton sendInputButton;
+    private javax.swing.JLabel successLabel;
     private javax.swing.JButton thresholdButton;
-    private javax.swing.JButton timeDomainButton2;
+    private javax.swing.JLabel thresholdWarningLabel;
     // End of variables declaration//GEN-END:variables
 
     private BasebandSignal inputSignal;
@@ -1238,16 +1396,20 @@ public class Main extends javax.swing.JFrame {
     private Signal receivedSignal;
     private Signal demodulatedSignal;
     private Signal filteredSignal;
+    private Signal thresholdSignal;
+    private Signal decodedSignal;
     
     private BPSK BPSKmodulation;
     private final AWGN noise = new AWGN();
+    private double[] filtered;
     private LPF lpFilter;
+    private HPF hpFilter;
+    private BPF bpFilter;
     
     private double samplingFrequency;
     private double samplingInterval;
     private double[] samplingIntervals;
     private final double sampleTime = 1;
-    private final int filterTaps = 50;
     
     private static LineChart oscilloscope;
     private static LineChart spectrometer;
@@ -1259,7 +1421,7 @@ public class Main extends javax.swing.JFrame {
     private final String spectrometerYLabel = "Magnitude";
     
     private double oscilloscopeXTickUnits = 0.256;
-    private final double oscilloscopeYTickUnits = 0.25;
-    private final double spectrometerXTickUnits = -1;
+    private final double oscilloscopeYTickUnits = -1;
+    private final double spectrometerXTickUnits = 8;
     private final double spectrometerYTickUnits = -1;
 }

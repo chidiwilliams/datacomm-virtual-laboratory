@@ -5,10 +5,6 @@
  */
 package simulator.classes.signals;
 
-import java.util.stream.IntStream;
-import simulator.classes.libraries.Complex;
-import simulator.classes.libraries.FFT;
-
 /**
  *
  * @author HP
@@ -30,6 +26,10 @@ public class Signal {
     }
 
     public void setSignal(double[] signal) {
+        if (signal.length != this.signal.length) {
+            throw new IllegalArgumentException("Invalid signal length");
+        }
+        
         this.signal = signal;
     }
 
@@ -61,5 +61,50 @@ public class Signal {
         }
         
         System.out.println("");
+    }
+    
+    public double[] getThresholds(int num_thresholds) {
+        if (num_thresholds > signal.length) {
+            throw new IllegalArgumentException("Number of thresholds must be less than number of samples.");
+        }
+        
+        double[] thresholds = new double[num_thresholds];
+        double[] thr_points = getThresholdPoints(num_thresholds);
+        
+        for (int i = 0; i < num_thresholds; i++) {
+            int point = (int) thr_points[i];
+            thresholds[i] = (signal[point] > 0) ? 1 : 0;
+        }
+        
+        return thresholds;
+    }
+    
+    public double[] getThresholdPoints(int num_thresholds) {
+        if (num_thresholds >= signal.length) {
+            throw new IllegalArgumentException("Number of thresholds must be less than number of samples.");
+        }
+        
+        double[] thr_points = new double[num_thresholds];
+        
+        int beginning = (int) Math.floor(signal.length / num_thresholds / 2) - 1;
+        
+        int width = (int) Math.floor(signal.length / num_thresholds);
+        
+        for (int i = 0; i < num_thresholds; i++) {
+            thr_points[i] = (width * i) + beginning;
+        }
+        
+        return thr_points;
+    }
+    
+    public static void main(String[] args) {
+        Signal sig = new Signal(2048);
+        sig.setSignal(new double[2048]);
+        
+        double[] thrp = sig.getThresholdPoints(8);
+        
+        for (int i = 0; i < thrp.length; i++) {
+            System.out.println(thrp[i]);
+        }
     }
 }

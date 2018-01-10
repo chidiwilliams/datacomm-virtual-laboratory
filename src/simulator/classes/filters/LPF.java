@@ -26,14 +26,7 @@ public class LPF {
 //      About 150 taps are required per 2048 samples.
         int num_taps =  (int) Math.round(input.length * 150 / 2048);
         
-        System.out.println(num_taps);
-        
-        filter = new Filter(filterType.LPF, num_taps, sampFreq, cutoffFreq);
-        
-        filtered = new double[input.length];
-        for (int i = 0; i < input.length; i++) {
-            filtered[i] = filter.do_sample(input[i]);
-        }
+        doFiltering(sampFreq, cutoffFreq, num_taps, input);
     }
     
     /**
@@ -44,8 +37,10 @@ public class LPF {
      * @param input
      */
     public LPF (double sampFreq, double cutoffFreq, int num_taps, double[] input) {      
-        System.out.println(num_taps);
-        
+        doFiltering(sampFreq, cutoffFreq, num_taps, input);
+    }
+    
+    private void doFiltering(double sampFreq, double cutoffFreq, int num_taps, double[] input) {
         filter = new Filter(filterType.LPF, num_taps, sampFreq, cutoffFreq);
         
         filtered = new double[input.length];
