@@ -5,7 +5,6 @@
  */
 package simulator;
 
-import java.util.Arrays;
 import simulator.classes.impairments.AWGN;
 import simulator.classes.codingSchemes.Hamming;
 import simulator.classes.signals.*;
@@ -22,6 +21,8 @@ import simulator.classes.libraries.ArrayFunctions;
  * @author HP
  */
 public class Main extends javax.swing.JFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates new form Main
@@ -45,7 +46,7 @@ public class Main extends javax.swing.JFrame {
         impairmentLabel1 = new javax.swing.JLabel();
         impairmentPowerLabel1 = new javax.swing.JLabel();
         filterTypeComboBox = new javax.swing.JComboBox<>();
-        impairmentPowerLabel2 = new javax.swing.JLabel();
+        cutoffFreqLabel = new javax.swing.JLabel();
         filterCutoffFreqHighTextField = new javax.swing.JTextField();
         filterButton = new javax.swing.JButton();
         filteringWarningLabel = new javax.swing.JLabel();
@@ -101,14 +102,13 @@ public class Main extends javax.swing.JFrame {
         setTitle("SIMULATOR");
         setLocation(new java.awt.Point(0, 0));
         setName("mainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(700, 735));
         setResizable(false);
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setMaximumSize(new java.awt.Dimension(700, 740));
         mainPanel.setMinimumSize(new java.awt.Dimension(700, 740));
         mainPanel.setName("mainPanel"); // NOI18N
-        mainPanel.setPreferredSize(new java.awt.Dimension(700, 740));
+        mainPanel.setPreferredSize(new java.awt.Dimension(700, 730));
 
         optionsPanel.setBackground(new java.awt.Color(255, 255, 255));
         optionsPanel.setMaximumSize(new java.awt.Dimension(680, 680));
@@ -136,9 +136,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        impairmentPowerLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        impairmentPowerLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        impairmentPowerLabel2.setText("Cutoff Frequency");
+        cutoffFreqLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        cutoffFreqLabel.setForeground(new java.awt.Color(0, 0, 0));
+        cutoffFreqLabel.setText("Cutoff Frequency");
 
         filterCutoffFreqHighTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         filterCutoffFreqHighTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -177,15 +177,17 @@ public class Main extends javax.swing.JFrame {
                                     .addGap(0, 0, Short.MAX_VALUE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decodePanelLayout.createSequentialGroup()
                                     .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(impairmentPowerLabel1)
-                                        .addComponent(impairmentPowerLabel2))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(decodePanelLayout.createSequentialGroup()
-                                            .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(filterTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                            .addComponent(impairmentPowerLabel1)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(cutoffFreqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(decodePanelLayout.createSequentialGroup()
+                                            .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(decodePanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,7 +205,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(impairmentPowerLabel2)
+                    .addComponent(cutoffFreqLabel)
                     .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -744,21 +746,19 @@ public class Main extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(optionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 694, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 694, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -981,7 +981,6 @@ public class Main extends javax.swing.JFrame {
         if (validateDemodulation()) {
             demodulatedSignal = new Signal(getSampleNumber());
             demodulatedSignal.setSignal(BPSKmodulation.getDemodulated(receivedSignal.getSignal()));
-            System.out.println(Arrays.toString(demodulatedSignal.getSignal()));
             
 //          PLOT SAMPLES
             oscilloscope.sendData(
@@ -1013,9 +1012,7 @@ public class Main extends javax.swing.JFrame {
 
     private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
         if (validateFiltering()) {
-            
             String filterType = filterTypeComboBox.getSelectedItem().toString();
-            
             filtered = new double[getSampleNumber()];
             
             switch (filterType) {
@@ -1029,6 +1026,7 @@ public class Main extends javax.swing.JFrame {
                case "High Pass":
                    {
                        double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+//                       hpFilter = new HPF(samplingFrequency, cutoffFreq, Integer.parseInt(filterTapsTextField.getText()), demodulatedSignal.getSignal());
                        hpFilter = new HPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
                        filtered = hpFilter.getFiltered();
                        break;
@@ -1053,7 +1051,7 @@ public class Main extends javax.swing.JFrame {
             filteredSignal = new Signal(getSampleNumber());
             filteredSignal.setSignal(filtered);
 
-//              PLOT SAMPLES
+//          PLOT SAMPLES
             oscilloscope.sendData(
                 "Filtered signal", 
                 samplingIntervals, 
@@ -1122,6 +1120,8 @@ public class Main extends javax.swing.JFrame {
             }
             
             Hamming hamming = new Hamming();
+            
+//          TODO: CHECK DECODING ERRORS BETTER !!!
             int errorBit = hamming.syndromeNum(thresholdLessParitySignal.getSignal());
             
             if (errorBit > -1) {
@@ -1129,6 +1129,7 @@ public class Main extends javax.swing.JFrame {
             } else {
                 successLabel.setText("Error free transmission.");
             }
+//            
             
             decodedSignal = new Signal(4);
             decodedSignal.setSignal(hamming.decode(thresholdLessParitySignal.getSignal()));
@@ -1164,9 +1165,11 @@ public class Main extends javax.swing.JFrame {
         String filterType = filterTypeComboBox.getSelectedItem().toString();
         switch(filterType) {
             case("Band Pass"):
+                cutoffFreqLabel.setText("Cutoff Frequencies");
                 filterCutoffFreqLowTextField.setEnabled(true);
                 break;
             default:
+                cutoffFreqLabel.setText("Cutoff Frequency");
                 filterCutoffFreqLowTextField.setEnabled(false);
                 break;
         }
@@ -1321,7 +1324,7 @@ public class Main extends javax.swing.JFrame {
             oscilloscope.setVisible(true);
             
             spectrometer = new LineChart("SPECTROMETER", 600, 320);
-            spectrometer.setLocation(700, 375);
+            spectrometer.setLocation(700, 360);
             spectrometer.setResizable(false);
             spectrometer.pack();
             spectrometer.setVisible(true);
@@ -1338,6 +1341,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel codingSchemeLabel;
     private javax.swing.JLabel codingSchemeLabel1;
     private javax.swing.JLabel codingSchemeLabel2;
+    private javax.swing.JLabel cutoffFreqLabel;
     private javax.swing.JButton decodeButton;
     private javax.swing.JPanel decodePanel;
     private javax.swing.JButton demodulateButton;
@@ -1358,7 +1362,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel impairmentPanel;
     private javax.swing.JLabel impairmentPowerLabel;
     private javax.swing.JLabel impairmentPowerLabel1;
-    private javax.swing.JLabel impairmentPowerLabel2;
     private javax.swing.JTextField impairmentPowerTextField;
     private javax.swing.JComboBox<String> impairmentTypeComboBox;
     private javax.swing.JLabel impairmentWarningLabel;

@@ -150,10 +150,11 @@ public class Filter
 
         for (n = 0; n < m_num_taps; n++) {
             mm = n - (m_num_taps - 1.0) / 2.0;
-            if (mm == 0.0)
+            if (mm == 0.0) {
                 m_taps[n] = m_lambda / Math.PI;
-            else
+            } else {
                 m_taps[n] = Math.sin(mm * m_lambda) / (mm * Math.PI);
+            }
         }
     }
 
@@ -164,10 +165,11 @@ public class Filter
 
         for (n = 0; n < m_num_taps; n++) {
             mm = n - (m_num_taps - 1.0) / 2.0;
-            if (mm == 0.0)
+            if (mm == 0.0) {
                 m_taps[n] = 1.0 - m_lambda / Math.PI;
-            else
+            } else {
                 m_taps[n] = -Math.sin(mm * m_lambda) / (mm * Math.PI);
+            }
         }
     }
 
@@ -220,7 +222,8 @@ public class Filter
             return;
         }
 
-        m_taps = m_sr = null;
+        m_taps = null;
+        m_sr = null;
         m_taps = new double[m_num_taps];
         m_sr = new double[m_num_taps];
         if (m_taps == null || m_sr == null)
@@ -235,16 +238,18 @@ public class Filter
         {
             m_error_flag = -5;
         }
-        else switch (m_filt_t) {
-            case LPF:
-                designLPF();
-                break;
-            case HPF:
-                designHPF();
-                break;
-            default:
-                m_error_flag = -5;
-                break;
+        else {
+            switch (m_filt_t) {
+                case LPF:
+                    designLPF();
+                    break;
+                case HPF:
+                    designHPF();
+                    break;
+                default:
+                    m_error_flag = -5;
+                    break;
+            }
         }
     }
 
@@ -286,7 +291,8 @@ public class Filter
             return;
         }
 
-        m_taps = m_sr = null;
+        m_taps = null;
+        m_sr = null;
         m_taps = new double[m_num_taps];
         m_sr = new double[m_num_taps];
         if (m_taps == null || m_sr == null)
@@ -308,38 +314,45 @@ public class Filter
     }
     public final void close()
     {
-        if (m_taps != null)
+        if (m_taps != null) {
             m_taps = null;
-        if (m_sr != null)
+        }
+        if (m_sr != null) {
             m_sr = null;
+        }
     }
     public final void init()
     {
         int i;
 
-        if (m_error_flag != 0)
+        if (m_error_flag != 0) {
             return;
+        }
 
-        for (i = 0; i < m_num_taps; i++)
+        for (i = 0; i < m_num_taps; i++) {
             m_sr[i] = 0;
+        }
     }
     public final double do_sample(double data_sample)
     {
         int i;
         double result;
 
-        if (m_error_flag != 0)
+        if (m_error_flag != 0) {
             return (0);
+        }
 
-        for (i = m_num_taps - 1; i >= 1; i--)
+        for (i = m_num_taps - 1; i >= 1; i--) {
             m_sr[i] = m_sr[i - 1];
+        }
 
         m_sr[0] = data_sample;
 
         result = 0;
 
-        for (i = 0; i < m_num_taps; i++)
+        for (i = 0; i < m_num_taps; i++) {
             result += m_sr[i] * m_taps[i];
+        }
 
         return result;
     }
@@ -353,17 +366,20 @@ public class Filter
     {
         int i;
 
-        if (m_error_flag != 0)
+        if (m_error_flag != 0) {
             return;
+        }
 
-        for (i = 0; i < m_num_taps; i++)
+        for (i = 0; i < m_num_taps; i++) {
             taps[i] = m_taps[i];
+        }
     }
 
     public final int write_taps_to_file(String filepath)
     {
-        if (m_error_flag != 0)
+        if (m_error_flag != 0) {
             return -1;
+        }
 
         try {
             BufferedWriter bufferedWriter;
@@ -396,14 +412,16 @@ public class Filter
         double mag_max = -1;
         double tmp_d;
 
-        if (m_error_flag != 0)
+        if (m_error_flag != 0) {
             return -1;
+        }
 
         dw = Math.PI / (DefineConstants.NP - 1.0);
         for (i = 0; i < DefineConstants.NP; i++)
         {
             w = i * dw;
-            y_r[i] = y_i[i] = 0;
+            y_r[i] = 0;
+            y_i[i] = 0;
             for (k = 0; k < m_num_taps; k++)
             {
                 y_r[i] += m_taps[k] * Math.cos(k * w);
@@ -431,11 +449,13 @@ public class Filter
 
             for (i = 0; i < DefineConstants.NP; i++) {
                 w = i * dw;
-                if (y_mag[i] == 0)
+                if (y_mag[i] == 0) {
                     tmp_d = -100;
-                else {
+                } else {
                     tmp_d = 20 * Math.log10(y_mag[i] / mag_max);
-                    if (tmp_d < -100) tmp_d = -100;
+                    if (tmp_d < -100) {
+                        tmp_d = -100;
+                    }
                 }
                 bufferedWriter.write(w * (m_Fs / 2) / Math.PI + " " + tmp_d);
             }
