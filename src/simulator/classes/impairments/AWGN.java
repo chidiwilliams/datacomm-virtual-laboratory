@@ -1,6 +1,8 @@
 package simulator.classes.impairments;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -56,7 +58,7 @@ public class AWGN {
     }
 
     public double[] readNoise(String filepath, int samples) {
-        String filename = (filepath.equals("")) ? "C:\\xampp\\htdocs\\FYP\\src\\simulator\\other\\noise.txt" : filepath;
+        String filename = (filepath.equals("")) ? "./src/simulator/other/noise.txt" : filepath;
         ArrayList<Double> samplesList = new ArrayList<>();
         double[] op = new double[samples];
         String line;
@@ -67,10 +69,16 @@ public class AWGN {
             while((line = bufferedReader.readLine()) != null) samplesList.add(Double.parseDouble(line));
             Arrays.setAll(op, samplesList::get);
         } catch (IOException e) {
+            
         }
 
         this.noise = op;
         
         return noise;
+    }
+    
+    
+    public static void main(String[] args) throws IOException {
+        Files.list(Paths.get("./src/simulator/other")).forEach(System.out::println);
     }
 }

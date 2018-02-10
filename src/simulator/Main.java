@@ -43,8 +43,8 @@ public class Main extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         optionsPanel = new javax.swing.JPanel();
         decodePanel = new javax.swing.JPanel();
-        impairmentLabel1 = new javax.swing.JLabel();
-        impairmentPowerLabel1 = new javax.swing.JLabel();
+        filterLabel = new javax.swing.JLabel();
+        filterTypeLabel = new javax.swing.JLabel();
         filterTypeComboBox = new javax.swing.JComboBox<>();
         cutoffFreqLabel = new javax.swing.JLabel();
         filterCutoffFreqHighTextField = new javax.swing.JTextField();
@@ -119,16 +119,16 @@ public class Main extends javax.swing.JFrame {
         decodePanel.setBackground(new java.awt.Color(239, 228, 176));
         decodePanel.setPreferredSize(new java.awt.Dimension(335, 162));
 
-        impairmentLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        impairmentLabel1.setForeground(new java.awt.Color(0, 3, 3));
-        impairmentLabel1.setText("Filtering");
-        impairmentLabel1.setName(""); // NOI18N
+        filterLabel.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        filterLabel.setForeground(new java.awt.Color(0, 3, 3));
+        filterLabel.setText("Filtering");
+        filterLabel.setName(""); // NOI18N
 
-        impairmentPowerLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        impairmentPowerLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        impairmentPowerLabel1.setText("Type of Filter");
+        filterTypeLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
+        filterTypeLabel.setForeground(new java.awt.Color(0, 0, 0));
+        filterTypeLabel.setText("Type of Filter");
 
-        filterTypeComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        filterTypeComboBox.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         filterTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Low Pass", "High Pass", "Band Pass" }));
         filterTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,14 +136,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        cutoffFreqLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        cutoffFreqLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         cutoffFreqLabel.setForeground(new java.awt.Color(0, 0, 0));
         cutoffFreqLabel.setText("Cutoff Frequency");
 
-        filterCutoffFreqHighTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        filterCutoffFreqHighTextField.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         filterCutoffFreqHighTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        filterButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        filterButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         filterButton.setText("Filter");
         filterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,11 +151,11 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        filteringWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        filteringWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         filteringWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         filteringWarningLabel.setText(" ");
 
-        filterCutoffFreqLowTextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        filterCutoffFreqLowTextField.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         filterCutoffFreqLowTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         filterCutoffFreqLowTextField.setEnabled(false);
 
@@ -163,45 +163,40 @@ public class Main extends javax.swing.JFrame {
         decodePanel.setLayout(decodePanelLayout);
         decodePanelLayout.setHorizontalGroup(
             decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(decodePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decodePanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(filteringWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, decodePanelLayout.createSequentialGroup()
+                        .addComponent(filterLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(decodePanelLayout.createSequentialGroup()
-                        .addComponent(filteringWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(decodePanelLayout.createSequentialGroup()
-                        .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(decodePanelLayout.createSequentialGroup()
-                                    .addComponent(impairmentLabel1)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decodePanelLayout.createSequentialGroup()
-                                    .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(decodePanelLayout.createSequentialGroup()
-                                            .addComponent(impairmentPowerLabel1)
-                                            .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(cutoffFreqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(decodePanelLayout.createSequentialGroup()
-                                            .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(decodePanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)))
-                        .addGap(20, 20, 20))))
+                                .addComponent(filterTypeLabel)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(cutoffFreqLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(decodePanelLayout.createSequentialGroup()
+                                .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(filterCutoffFreqHighTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(20, 20, 20))
+            .addGroup(decodePanelLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(filterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         decodePanelLayout.setVerticalGroup(
             decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decodePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(impairmentLabel1)
+                .addComponent(filterLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(impairmentPowerLabel1)
+                    .addComponent(filterTypeLabel)
                     .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(decodePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -210,20 +205,20 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(filterCutoffFreqLowTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filteringWarningLabel)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterButton)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
 
         filterPanel.setBackground(new java.awt.Color(239, 228, 176));
         filterPanel.setPreferredSize(new java.awt.Dimension(335, 162));
 
-        inputMessageLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputMessageLabel6.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         inputMessageLabel6.setForeground(new java.awt.Color(0, 3, 3));
         inputMessageLabel6.setText("Demodulation");
         inputMessageLabel6.setName(""); // NOI18N
 
-        demodulateButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        demodulateButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         demodulateButton.setText("Demodulate");
         demodulateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +226,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        demodulationWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        demodulationWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         demodulationWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         demodulationWarningLabel.setText(" ");
 
@@ -243,11 +238,12 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(filterPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputMessageLabel6)
-                            .addComponent(demodulationWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inputMessageLabel6))
                     .addGroup(filterPanelLayout.createSequentialGroup()
-                        .addGap(66, 66, 66)
+                        .addContainerGap()
+                        .addComponent(demodulationWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(filterPanelLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addComponent(demodulateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -256,22 +252,22 @@ public class Main extends javax.swing.JFrame {
             .addGroup(filterPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(inputMessageLabel6)
-                .addGap(11, 11, 11)
-                .addComponent(demodulationWarningLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(demodulateButton)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(demodulationWarningLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         domainPanel.setBackground(new java.awt.Color(239, 228, 176));
         domainPanel.setPreferredSize(new java.awt.Dimension(335, 162));
 
-        impairmentLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        impairmentLabel2.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         impairmentLabel2.setForeground(new java.awt.Color(0, 3, 3));
         impairmentLabel2.setText("Decode and Result");
         impairmentLabel2.setName(""); // NOI18N
 
-        thresholdButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        thresholdButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         thresholdButton.setText("Threshold");
         thresholdButton.setToolTipText("");
         thresholdButton.addActionListener(new java.awt.event.ActionListener() {
@@ -280,7 +276,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        decodeButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        decodeButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         decodeButton.setText("Decode");
         decodeButton.setToolTipText("");
         decodeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -302,16 +298,18 @@ public class Main extends javax.swing.JFrame {
         domainPanelLayout.setHorizontalGroup(
             domainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(domainPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(domainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(thresholdWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(impairmentLabel2)
                     .addGroup(domainPanelLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(thresholdButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(decodeButton))
-                    .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(domainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(thresholdWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(impairmentLabel2)
+                            .addComponent(successLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(domainPanelLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(thresholdButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(decodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         domainPanelLayout.setVerticalGroup(
@@ -327,12 +325,12 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(decodeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(successLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         impairmentPanel.setBackground(new java.awt.Color(239, 228, 176));
 
-        impairmentLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        impairmentLabel.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         impairmentLabel.setForeground(new java.awt.Color(0, 3, 3));
         impairmentLabel.setText("Impairment");
         impairmentLabel.setName(""); // NOI18N
@@ -347,7 +345,7 @@ public class Main extends javax.swing.JFrame {
         impairmentTypeComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         impairmentTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AWGN" }));
 
-        impairmentButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        impairmentButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         impairmentButton.setText("Add");
         impairmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,7 +353,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        impairmentWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        impairmentWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         impairmentWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         impairmentWarningLabel.setText(" ");
 
@@ -364,25 +362,23 @@ public class Main extends javax.swing.JFrame {
         impairmentPanelLayout.setHorizontalGroup(
             impairmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(impairmentPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(impairmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(impairmentPanelLayout.createSequentialGroup()
-                        .addComponent(impairmentWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(impairmentPanelLayout.createSequentialGroup()
-                        .addGroup(impairmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(impairmentPanelLayout.createSequentialGroup()
-                                .addComponent(impairmentPowerLabel)
-                                .addGap(36, 36, 36)
-                                .addComponent(impairmentPowerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(impairmentTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(impairmentLabel))
-                        .addGap(26, 26, 26))))
-            .addGroup(impairmentPanelLayout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addComponent(impairmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, impairmentPanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(impairmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(impairmentWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, impairmentPanelLayout.createSequentialGroup()
+                        .addComponent(impairmentPowerLabel)
+                        .addGap(36, 36, 36)
+                        .addComponent(impairmentPowerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(impairmentTypeComboBox, 0, 123, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, impairmentPanelLayout.createSequentialGroup()
+                        .addComponent(impairmentLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(26, 26, 26))
         );
         impairmentPanelLayout.setVerticalGroup(
             impairmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,25 +397,25 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(impairmentWarningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(impairmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(impairmentButton)
+                .addGap(21, 21, 21))
         );
 
         modulationPanel.setBackground(new java.awt.Color(239, 228, 176));
 
-        inputMessageLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputMessageLabel3.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         inputMessageLabel3.setForeground(new java.awt.Color(0, 3, 3));
         inputMessageLabel3.setText("Modulation");
         inputMessageLabel3.setName(""); // NOI18N
 
-        codingSchemeLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        codingSchemeLabel1.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         codingSchemeLabel1.setForeground(new java.awt.Color(0, 0, 0));
         codingSchemeLabel1.setText("Modulation Scheme");
 
-        modulationSchemeComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        modulationSchemeComboBox.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         modulationSchemeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BPSK" }));
 
-        modulateButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        modulateButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         modulateButton.setText("Modulate");
         modulateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,7 +423,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        modulateWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        modulateWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         modulateWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         modulateWarningLabel.setText(" ");
 
@@ -443,7 +439,7 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(modulationPanelLayout.createSequentialGroup()
                         .addComponent(codingSchemeLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addComponent(modulationSchemeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modulationPanelLayout.createSequentialGroup()
@@ -473,19 +469,19 @@ public class Main extends javax.swing.JFrame {
 
         carrierPanel.setBackground(new java.awt.Color(239, 228, 176));
 
-        inputMessageLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputMessageLabel2.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         inputMessageLabel2.setForeground(new java.awt.Color(0, 3, 3));
         inputMessageLabel2.setText("Generate Carrier");
         inputMessageLabel2.setName(""); // NOI18N
 
-        carrierFrequencyComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        carrierFrequencyComboBox.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         carrierFrequencyComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8", "16" }));
 
-        codingSchemeLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        codingSchemeLabel2.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         codingSchemeLabel2.setForeground(new java.awt.Color(0, 0, 0));
         codingSchemeLabel2.setText("Carrier Frequency");
 
-        carrierButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        carrierButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         carrierButton.setText("Generate Carrier");
         carrierButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -493,7 +489,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        carrierWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        carrierWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         carrierWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         carrierWarningLabel.setText(" ");
 
@@ -502,7 +498,7 @@ public class Main extends javax.swing.JFrame {
         carrierPanelLayout.setHorizontalGroup(
             carrierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carrierPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(65, Short.MAX_VALUE)
                 .addComponent(carrierButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
             .addGroup(carrierPanelLayout.createSequentialGroup()
@@ -510,10 +506,11 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(carrierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(carrierWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(carrierPanelLayout.createSequentialGroup()
-                        .addComponent(codingSchemeLabel2)
+                        .addGroup(carrierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codingSchemeLabel2)
+                            .addComponent(inputMessageLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(carrierFrequencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inputMessageLabel2))
+                        .addComponent(carrierFrequencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         carrierPanelLayout.setVerticalGroup(
@@ -524,7 +521,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(carrierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(codingSchemeLabel2)
-                    .addComponent(carrierFrequencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(carrierFrequencyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(carrierWarningLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -534,30 +531,30 @@ public class Main extends javax.swing.JFrame {
 
         codingPanel.setBackground(new java.awt.Color(239, 228, 176));
 
-        inputMessageLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputMessageLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         inputMessageLabel1.setForeground(new java.awt.Color(0, 3, 3));
         inputMessageLabel1.setText("Coding and Sampling");
         inputMessageLabel1.setName(""); // NOI18N
 
-        codingSchemeLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        codingSchemeLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         codingSchemeLabel.setForeground(new java.awt.Color(0, 0, 0));
         codingSchemeLabel.setText("Coding Scheme");
 
-        codingSchemeComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        codingSchemeComboBox.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         codingSchemeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HAMMING" }));
 
-        sampleNoLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        sampleNoLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         sampleNoLabel.setForeground(new java.awt.Color(0, 0, 0));
         sampleNoLabel.setText("Number of Samples");
 
-        sampleNoComboBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        sampleNoComboBox.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         sampleNoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "128", "256", "512", "1024", "2048" }));
 
-        encodeWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        encodeWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         encodeWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         encodeWarningLabel.setText(" ");
 
-        encodeAndSampleButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        encodeAndSampleButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         encodeAndSampleButton.setText("Encode and Sample");
         encodeAndSampleButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -569,6 +566,10 @@ public class Main extends javax.swing.JFrame {
         codingPanel.setLayout(codingPanelLayout);
         codingPanelLayout.setHorizontalGroup(
             codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, codingPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(encodeAndSampleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63))
             .addGroup(codingPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,15 +583,11 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(codingSchemeLabel)
                                     .addComponent(sampleNoLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(36, 36, Short.MAX_VALUE)
                                 .addGroup(codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(sampleNoComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(codingSchemeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(15, 15, 15))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, codingPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(encodeAndSampleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
         );
         codingPanelLayout.setVerticalGroup(
             codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,48 +596,48 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(inputMessageLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codingSchemeLabel)
-                    .addComponent(codingSchemeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(codingSchemeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codingSchemeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(codingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sampleNoLabel)
-                    .addComponent(sampleNoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(encodeWarningLabel)
+                    .addComponent(sampleNoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sampleNoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(encodeAndSampleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addComponent(encodeWarningLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(encodeAndSampleButton)
+                .addGap(19, 19, 19))
         );
 
         inputPanel.setBackground(new java.awt.Color(239, 228, 176));
         inputPanel.setName("inputPanel"); // NOI18N
 
-        inputMessageLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputMessageLabel.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         inputMessageLabel.setForeground(new java.awt.Color(0, 3, 3));
         inputMessageLabel.setText("Input Message");
         inputMessageLabel.setName(""); // NOI18N
 
-        messageLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        messageLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         messageLabel.setForeground(new java.awt.Color(0, 0, 0));
         messageLabel.setText("Message");
 
-        inputBit2TextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputBit2TextField.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         inputBit2TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        inputBit1TextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputBit1TextField.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         inputBit1TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        inputBit3TextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputBit3TextField.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         inputBit3TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        inputBit4TextField.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        inputBit4TextField.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         inputBit4TextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        inputWarningLabel.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        inputWarningLabel.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         inputWarningLabel.setForeground(new java.awt.Color(255, 0, 0));
         inputWarningLabel.setText(" ");
 
-        sendInputButton.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        sendInputButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         sendInputButton.setText("Send");
         sendInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -654,11 +651,10 @@ public class Main extends javax.swing.JFrame {
             inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inputPanelLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inputWarningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(inputPanelLayout.createSequentialGroup()
                         .addComponent(messageLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(inputBit1TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inputBit2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -666,8 +662,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(inputBit3TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inputBit4TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(inputMessageLabel))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(inputMessageLabel)
+                    .addComponent(inputWarningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sendInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -689,8 +686,8 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(inputWarningLabel)
                 .addGap(7, 7, 7)
-                .addComponent(sendInputButton)
-                .addGap(12, 12, 12))
+                .addComponent(sendInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
@@ -703,34 +700,35 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(carrierPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(codingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(filterPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                     .addComponent(impairmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(decodePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                    .addComponent(domainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)))
+                    .addComponent(domainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                    .addComponent(decodePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(impairmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, optionsPanelLayout.createSequentialGroup()
+                        .addComponent(impairmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(decodePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(domainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(optionsPanelLayout.createSequentialGroup()
-                        .addComponent(codingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(carrierPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
-                        .addComponent(filterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(codingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(decodePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(modulationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(domainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
-                .addGap(41, 41, 41))
+                        .addComponent(carrierPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(modulationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -746,7 +744,7 @@ public class Main extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -758,7 +756,9 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 683, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -767,92 +767,91 @@ public class Main extends javax.swing.JFrame {
     private void sendInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendInputButtonActionPerformed
         if (validateInput()) {
             double[] input = {
-                Double.parseDouble(inputBit1TextField.getText()), 
-                Double.parseDouble(inputBit2TextField.getText()), 
-                Double.parseDouble(inputBit3TextField.getText()), 
+                Double.parseDouble(inputBit1TextField.getText()),
+                Double.parseDouble(inputBit2TextField.getText()),
+                Double.parseDouble(inputBit3TextField.getText()),
                 Double.parseDouble(inputBit4TextField.getText())
             };
-            
+
             inputSignal = new BasebandSignal(4);
             inputSignal.setSignal(input);
-            
-//          PLOT SAMPLES
+
+            //          PLOT SAMPLES
             oscilloscope.sendData(
-                    "Input bits", 
-                    new double[]{1, 2, 3, 4}, 
-                    inputSignal.getSignal(), 
-                    bitsXLabel, 
-                    oscilloscopeYLabel, 
-                    1, 
-                    1,
-                    lineChartType.POINTS,
-                    0.5);
+                "Input bits",
+                new double[]{1, 2, 3, 4},
+                inputSignal.getSignal(),
+                bitsXLabel,
+                oscilloscopeYLabel,
+                1,
+                1,
+                lineChartType.POINTS,
+                0.5);
             oscilloscope.pack();
-            
+
             spectrometer.sendData(
-                    "",
-                    new double[0],
-                    new double[0],
-                    "",
-                    "",
-                    0,
-                    0,
-                    lineChartType.DEFAULT,
-                    -1);
+                "",
+                new double[0],
+                new double[0],
+                "",
+                "",
+                0,
+                0,
+                lineChartType.DEFAULT,
+                -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_sendInputButtonActionPerformed
 
     private void encodeAndSampleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encodeAndSampleButtonActionPerformed
         if (validateEncodingandSampling()) {
-//          CODING
+            //          CODING
             if (codingSchemeComboBox.getSelectedItem() == "HAMMING") {
                 double[] coded = new Hamming(inputSignal.getSignal()).getCodedWithParity();
-                
+
                 basebandSignal = new BasebandSignal(8);
                 basebandSignal.setSignal(coded);
             }
 
-//          GET SAMPLING TIME
+            //          GET SAMPLING TIME
             int sampleNo = Integer.parseInt(sampleNoComboBox.getSelectedItem().toString());
             messageSignal = new BasebandSignal(sampleNo);
             messageSignal.setSignal(basebandSignal.expandTo(sampleNo));
-            
+
             samplingInterval = sampleTime / getSampleNumber();
             samplingFrequency = getSampleNumber();
             oscilloscopeXTickUnits = sampleTime / 8;
-            
-//          SAMPLING
+
+            //          SAMPLING
             samplingIntervals = new double[getSampleNumber()];
             for (int i = 0; i < samplingIntervals.length; i++) {
                 samplingIntervals[i] = samplingInterval * i;
             }
-            
-            
-//          PLOT SAMPLES
+
+            //          PLOT SAMPLES
             oscilloscope.sendData(
-                    "Encoded and sampled bits", 
-                    samplingIntervals, 
-                    messageSignal.getSignal(), 
-                    oscilloscopeXLabel, 
-                    oscilloscopeYLabel, 
-                    oscilloscopeXTickUnits, 
-                    oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Encoded and sampled bits",
+                samplingIntervals,
+                messageSignal.getSignal(),
+                oscilloscopeXLabel,
+                oscilloscopeYLabel,
+                oscilloscopeXTickUnits,
+                oscilloscopeYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             oscilloscope.pack();
-            
+
             SignalFFT messageFFT = new SignalFFT(samplingFrequency, messageSignal.getSignal());
             spectrometer.sendData(
-                    "Encoded and sampled bits", 
-                    messageFFT.getFrequenciesToMax(100), 
-                    messageFFT.getSingleSidedSpectrumToMax(100), 
-                    spectrometerXLabel, 
-                    spectrometerYLabel, 
-                    spectrometerXTickUnits, 
-                    spectrometerYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Encoded and sampled bits",
+                messageFFT.getFrequenciesToMax(100),
+                messageFFT.getSingleSidedSpectrumToMax(100),
+                spectrometerXLabel,
+                spectrometerYLabel,
+                spectrometerXTickUnits,
+                spectrometerYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_encodeAndSampleButtonActionPerformed
@@ -862,83 +861,43 @@ public class Main extends javax.swing.JFrame {
             int frequency = Integer.parseInt(carrierFrequencyComboBox.getSelectedItem().toString());
 
             carrierSignal = new CarrierSignal(getSampleNumber(), frequency);
-            
-//          PLOT SAMPLES
+
+            //          PLOT SAMPLES
             oscilloscope.sendData(
-                    "Carrier signal", 
-                    samplingIntervals, 
-                    carrierSignal.getSignal(), 
-                    oscilloscopeXLabel, 
-                    oscilloscopeYLabel, 
-                    oscilloscopeXTickUnits, 
-                    oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Carrier signal",
+                samplingIntervals,
+                carrierSignal.getSignal(),
+                oscilloscopeXLabel,
+                oscilloscopeYLabel,
+                oscilloscopeXTickUnits,
+                oscilloscopeYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             oscilloscope.pack();
-            
+
             SignalFFT carrierFFT = new SignalFFT(samplingFrequency, carrierSignal.getSignal());
             spectrometer.sendData(
-                    "Carrier signal", 
-                    carrierFFT.getFrequenciesToMax(100), 
-                    carrierFFT.getSingleSidedSpectrumToMax(100), 
-                    spectrometerXLabel, 
-                    spectrometerYLabel, 
-                    spectrometerXTickUnits, 
-                    spectrometerYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Carrier signal",
+                carrierFFT.getFrequenciesToMax(100),
+                carrierFFT.getSingleSidedSpectrumToMax(100),
+                spectrometerXLabel,
+                spectrometerYLabel,
+                spectrometerXTickUnits,
+                spectrometerYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_carrierButtonActionPerformed
 
-    private void modulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modulateButtonActionPerformed
-        String modulationScheme = modulationSchemeComboBox.getSelectedItem().toString();
-        
-        if (validateModulation()) {
-            if ("BPSK".equals(modulationScheme)) {
-                modulatedSignal = new Signal(getSampleNumber());
-                
-                BPSKmodulation = new BPSK(messageSignal.getSignal(), carrierSignal.getSignal());
-                
-                modulatedSignal.setSignal(
-                        BPSKmodulation.getModulated()
-                );
-            }
-            
-//          PLOT SAMPLES
-            oscilloscope.sendData(
-                    "Modulated signal", 
-                    samplingIntervals, 
-                    modulatedSignal.getSignal(), 
-                    oscilloscopeXLabel, 
-                    oscilloscopeYLabel, 
-                    oscilloscopeXTickUnits, 
-                    oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
-            oscilloscope.pack();
-            
-            SignalFFT modulatedFFT = new SignalFFT(samplingFrequency, modulatedSignal.getSignal());
-            spectrometer.sendData(
-                    "Modulated signal", 
-                    modulatedFFT.getFrequenciesToMax(100), 
-                    modulatedFFT.getSingleSidedSpectrumToMax(100), 
-                    spectrometerXLabel, 
-                    spectrometerYLabel, 
-                    spectrometerXTickUnits, 
-                    spectrometerYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
-            spectrometer.pack();
-        }
-    }//GEN-LAST:event_modulateButtonActionPerformed
-
     private void impairmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_impairmentButtonActionPerformed
         String impairmentType = impairmentTypeComboBox.getSelectedItem().toString();
-        
+
         if (validateImpairment()) {
             if ("AWGN".equals(impairmentType)) {
                 double impairmentPower = Double.parseDouble(impairmentPowerTextField.getText());
+
+                System.out.println(impairmentPower);
 
                 noise.readNoise("", getSampleNumber());
                 double[] impairment_values = noise.setAmplitude(impairmentPower);
@@ -947,65 +906,137 @@ public class Main extends javax.swing.JFrame {
                 receivedSignal = new Signal(getSampleNumber());
                 receivedSignal.setSignal(mod_plus_impairment);
             }
-            
-//          PLOT SAMPLES
+
+            //          PLOT SAMPLES
             oscilloscope.sendData(
-                    "Received signal", 
-                    samplingIntervals, 
-                    receivedSignal.getSignal(), 
-                    oscilloscopeXLabel, 
-                    oscilloscopeYLabel, 
-                    oscilloscopeXTickUnits, 
-                    oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Received signal",
+                samplingIntervals,
+                receivedSignal.getSignal(),
+                oscilloscopeXLabel,
+                oscilloscopeYLabel,
+                oscilloscopeXTickUnits,
+                oscilloscopeYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             oscilloscope.pack();
-            
+
             SignalFFT receivedFFT = new SignalFFT(samplingFrequency, receivedSignal.getSignal());
             spectrometer.sendData(
-                    "Received signal", 
-                    receivedFFT.getFrequenciesToMax(100), 
-                    receivedFFT.getSingleSidedSpectrumToMax(100), 
-                    spectrometerXLabel, 
-                    spectrometerYLabel, 
-                    spectrometerXTickUnits, 
-                    spectrometerYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Received signal",
+                receivedFFT.getFrequenciesToMax(100),
+                receivedFFT.getSingleSidedSpectrumToMax(100),
+                spectrometerXLabel,
+                spectrometerYLabel,
+                spectrometerXTickUnits,
+                spectrometerYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             spectrometer.pack();
         }
-        
+
     }//GEN-LAST:event_impairmentButtonActionPerformed
+
+    private void decodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decodeButtonActionPerformed
+        if (validateDecoding()) {
+            //          REMOVE PARITY BIT
+            Signal thresholdLessParitySignal = new Signal(7);
+            for (int i = 0; i < thresholdLessParitySignal.getLength(); i++) {
+                thresholdLessParitySignal.setSignalValue(i, thresholdSignal.getSignalValue(i));
+            }
+
+            decodedSignal = new Signal(4);
+            decodedSignal.setSignal(new Hamming().decode(thresholdLessParitySignal.getSignal()));
+            
+            successLabel.setText("Decoded bits: " + decodedSignal.getSignalValue(0) + decodedSignal.getSignalValue(1) + decodedSignal.getSignalValue(2) + decodedSignal.getSignalValue(3));
+
+            //          PLOT SAMPLES
+            oscilloscope.sendData(
+                "Decoded bits",
+                new double[]{1, 2, 3, 4},
+                decodedSignal.getSignal(),
+                bitsXLabel,
+                oscilloscopeYLabel,
+                1,
+                1,
+                lineChartType.POINTS,
+                0.75);
+            oscilloscope.pack();
+
+            spectrometer.sendData(
+                "",
+                new double[0],
+                new double[0],
+                "",
+                "",
+                0,
+                0,
+                lineChartType.DEFAULT,
+                -1);
+            spectrometer.pack();
+        }
+    }//GEN-LAST:event_decodeButtonActionPerformed
+
+    private void thresholdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thresholdButtonActionPerformed
+        if (validateThreshold()) {
+            thresholdSignal = new Signal(8);
+            thresholdSignal.setSignal(filteredSignal.getThresholds(8));
+
+            //          PLOT SAMPLES
+            oscilloscope.sendData(
+                "Threshold bits",
+                new double[]{1, 2, 3, 4, 5, 6, 7, 8},
+                thresholdSignal.getSignal(),
+                bitsXLabel,
+                oscilloscopeYLabel,
+                1,
+                1,
+                lineChartType.POINTS,
+                0.05);
+            oscilloscope.pack();
+
+            spectrometer.sendData(
+                "",
+                new double[0],
+                new double[0],
+                "",
+                "",
+                0,
+                0,
+                lineChartType.DEFAULT,
+                -1);
+            spectrometer.pack();
+        }
+    }//GEN-LAST:event_thresholdButtonActionPerformed
 
     private void demodulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demodulateButtonActionPerformed
         if (validateDemodulation()) {
             demodulatedSignal = new Signal(getSampleNumber());
             demodulatedSignal.setSignal(BPSKmodulation.getDemodulated(receivedSignal.getSignal()));
-            
-//          PLOT SAMPLES
+
+            //          PLOT SAMPLES
             oscilloscope.sendData(
-                    "Demodulated signal", 
-                    samplingIntervals, 
-                    demodulatedSignal.getSignal(), 
-                    oscilloscopeXLabel, 
-                    oscilloscopeYLabel, 
-                    oscilloscopeXTickUnits, 
-                    oscilloscopeYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Demodulated signal",
+                samplingIntervals,
+                demodulatedSignal.getSignal(),
+                oscilloscopeXLabel,
+                oscilloscopeYLabel,
+                oscilloscopeXTickUnits,
+                oscilloscopeYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             oscilloscope.pack();
 
             SignalFFT demodulatedFFT = new SignalFFT(samplingFrequency, demodulatedSignal.getSignal());
             spectrometer.sendData(
-                    "Demodulated signal", 
-                    demodulatedFFT.getFrequenciesToMax(100), 
-                    demodulatedFFT.getSingleSidedSpectrumToMax(100), 
-                    spectrometerXLabel, 
-                    spectrometerYLabel, 
-                    spectrometerXTickUnits, 
-                    spectrometerYTickUnits, 
-                    lineChartType.DEFAULT,
-                    -1);
+                "Demodulated signal",
+                demodulatedFFT.getFrequenciesToMax(100),
+                demodulatedFFT.getSingleSidedSpectrumToMax(100),
+                spectrometerXLabel,
+                spectrometerYLabel,
+                spectrometerXTickUnits,
+                spectrometerYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_demodulateButtonActionPerformed
@@ -1014,166 +1045,126 @@ public class Main extends javax.swing.JFrame {
         if (validateFiltering()) {
             String filterType = filterTypeComboBox.getSelectedItem().toString();
             filtered = new double[getSampleNumber()];
-            
+
             switch (filterType) {
-               case "Low Pass":
-                   {
-                       double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
-                       lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
-                       filtered = lpFilter.getFiltered();
-                       break;
-                   }
-               case "High Pass":
-                   {
-                       double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
-//                       hpFilter = new HPF(samplingFrequency, cutoffFreq, Integer.parseInt(filterTapsTextField.getText()), demodulatedSignal.getSignal());
-                       hpFilter = new HPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
-                       filtered = hpFilter.getFiltered();
-                       break;
-                   }
-               case "Band Pass":
-                    {
-                        double cutoffFreqLow = Double.parseDouble(filterCutoffFreqLowTextField.getText());
-                        double cutoffFreqHigh = Double.parseDouble(filterCutoffFreqHighTextField.getText());
-                        bpFilter = new BPF(samplingFrequency, cutoffFreqLow, cutoffFreqHigh, demodulatedSignal.getSignal());
-                        filtered = bpFilter.getFiltered();
-                        break;
-                    }
-               default:
-                   {
-                       double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
-                       lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
-                       filtered = lpFilter.getFiltered();
-                       break;
-                   }
+                case "Low Pass":
+                {
+                    double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                    lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
+                    filtered = lpFilter.getFiltered();
+                    break;
+                }
+                case "High Pass":
+                {
+                    double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                    //                       hpFilter = new HPF(samplingFrequency, cutoffFreq, Integer.parseInt(filterTapsTextField.getText()), demodulatedSignal.getSignal());
+                    hpFilter = new HPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
+                    filtered = hpFilter.getFiltered();
+                    break;
+                }
+                case "Band Pass":
+                {
+                    double cutoffFreqLow = Double.parseDouble(filterCutoffFreqLowTextField.getText());
+                    double cutoffFreqHigh = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                    bpFilter = new BPF(samplingFrequency, cutoffFreqLow, cutoffFreqHigh, demodulatedSignal.getSignal());
+                    filtered = bpFilter.getFiltered();
+                    break;
+                }
+                default:
+                {
+                    double cutoffFreq = Double.parseDouble(filterCutoffFreqHighTextField.getText());
+                    lpFilter = new LPF(samplingFrequency, cutoffFreq, demodulatedSignal.getSignal());
+                    filtered = lpFilter.getFiltered();
+                    break;
+                }
             }
-            
+
             filteredSignal = new Signal(getSampleNumber());
             filteredSignal.setSignal(filtered);
 
-//          PLOT SAMPLES
+            //          PLOT SAMPLES
             oscilloscope.sendData(
-                "Filtered signal", 
-                samplingIntervals, 
-                filteredSignal.getSignal(), 
-                oscilloscopeXLabel, 
-                oscilloscopeYLabel, 
-                oscilloscopeXTickUnits, 
-                oscilloscopeYTickUnits, 
+                "Filtered signal",
+                samplingIntervals,
+                filteredSignal.getSignal(),
+                oscilloscopeXLabel,
+                oscilloscopeYLabel,
+                oscilloscopeXTickUnits,
+                oscilloscopeYTickUnits,
                 lineChartType.DEFAULT,
                 -1);
             oscilloscope.pack();
 
             SignalFFT filteredFFT = new SignalFFT(samplingFrequency, filteredSignal.getSignal());
             spectrometer.sendData(
-                "Filtered signal", 
-                filteredFFT.getFrequenciesToMax(100), 
-                filteredFFT.getSingleSidedSpectrumToMax(100), 
-                spectrometerXLabel, 
-                spectrometerYLabel, 
-                spectrometerXTickUnits, 
-                spectrometerYTickUnits, 
+                "Filtered signal",
+                filteredFFT.getFrequenciesToMax(100),
+                filteredFFT.getSingleSidedSpectrumToMax(100),
+                spectrometerXLabel,
+                spectrometerYLabel,
+                spectrometerXTickUnits,
+                spectrometerYTickUnits,
                 lineChartType.DEFAULT,
                 -1);
             spectrometer.pack();
         }
     }//GEN-LAST:event_filterButtonActionPerformed
 
-    private void thresholdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thresholdButtonActionPerformed
-        if (validateThreshold()) { 
-            thresholdSignal = new Signal(8);
-            thresholdSignal.setSignal(filteredSignal.getThresholds(8));
-            
-//          PLOT SAMPLES
-            oscilloscope.sendData(
-                    "Threshold bits",
-                    new double[]{1, 2, 3, 4, 5, 6, 7, 8}, 
-                    thresholdSignal.getSignal(), 
-                    bitsXLabel, 
-                    oscilloscopeYLabel, 
-                    1, 
-                    1, 
-                    lineChartType.POINTS,
-                    0.05);
-            oscilloscope.pack();
-            
-            spectrometer.sendData(
-                    "",
-                    new double[0],
-                    new double[0],
-                    "",
-                    "",
-                    0,
-                    0,
-                    lineChartType.DEFAULT,
-                    -1);
-            spectrometer.pack();
-        }
-    }//GEN-LAST:event_thresholdButtonActionPerformed
-
-    private void decodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decodeButtonActionPerformed
-        if (validateDecoding()) {
-//          REMOVE PARITY BIT
-            Signal thresholdLessParitySignal = new Signal(7);
-            for (int i = 0; i < thresholdLessParitySignal.getLength(); i++) {
-                thresholdLessParitySignal.setSignalValue(i, thresholdSignal.getSignalValue(i));
-            }
-            
-            Hamming hamming = new Hamming();
-            
-//          TODO: CHECK DECODING ERRORS BETTER !!!
-            int errorBit = hamming.syndromeNum(thresholdLessParitySignal.getSignal());
-            
-            if (errorBit > -1) {
-                successLabel.setText("Corrected error at bit " + (errorBit + 1) + "");
-            } else {
-                successLabel.setText("Error free transmission.");
-            }
-//            
-            
-            decodedSignal = new Signal(4);
-            decodedSignal.setSignal(hamming.decode(thresholdLessParitySignal.getSignal()));
-            
-//          PLOT SAMPLES
-            oscilloscope.sendData(
-                    "Decoded bits",
-                    new double[]{1, 2, 3, 4}, 
-                    decodedSignal.getSignal(), 
-                    bitsXLabel, 
-                    oscilloscopeYLabel, 
-                    1, 
-                    1, 
-                    lineChartType.POINTS,
-                    0.75);
-            oscilloscope.pack();
-            
-            spectrometer.sendData(
-                    "",
-                    new double[0],
-                    new double[0],
-                    "",
-                    "",
-                    0,
-                    0,
-                    lineChartType.DEFAULT,
-                    -1);
-            spectrometer.pack();
-        }
-    }//GEN-LAST:event_decodeButtonActionPerformed
-
     private void filterTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTypeComboBoxActionPerformed
         String filterType = filterTypeComboBox.getSelectedItem().toString();
         switch(filterType) {
             case("Band Pass"):
-                cutoffFreqLabel.setText("Cutoff Frequencies");
-                filterCutoffFreqLowTextField.setEnabled(true);
-                break;
+            cutoffFreqLabel.setText("Cutoff Frequencies");
+            filterCutoffFreqLowTextField.setEnabled(true);
+            break;
             default:
-                cutoffFreqLabel.setText("Cutoff Frequency");
-                filterCutoffFreqLowTextField.setEnabled(false);
-                break;
+            cutoffFreqLabel.setText("Cutoff Frequency");
+            filterCutoffFreqLowTextField.setEnabled(false);
+            break;
         }
     }//GEN-LAST:event_filterTypeComboBoxActionPerformed
+
+    private void modulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modulateButtonActionPerformed
+        String modulationScheme = modulationSchemeComboBox.getSelectedItem().toString();
+
+        if (validateModulation()) {
+            if ("BPSK".equals(modulationScheme)) {
+                modulatedSignal = new Signal(getSampleNumber());
+
+                BPSKmodulation = new BPSK(messageSignal.getSignal(), carrierSignal.getSignal());
+
+                modulatedSignal.setSignal(
+                    BPSKmodulation.getModulated()
+                );
+            }
+
+            //          PLOT SAMPLES
+            oscilloscope.sendData(
+                "Modulated signal",
+                samplingIntervals,
+                modulatedSignal.getSignal(),
+                oscilloscopeXLabel,
+                oscilloscopeYLabel,
+                oscilloscopeXTickUnits,
+                oscilloscopeYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
+            oscilloscope.pack();
+
+            SignalFFT modulatedFFT = new SignalFFT(samplingFrequency, modulatedSignal.getSignal());
+            spectrometer.sendData(
+                "Modulated signal",
+                modulatedFFT.getFrequenciesToMax(100),
+                modulatedFFT.getSingleSidedSpectrumToMax(100),
+                spectrometerXLabel,
+                spectrometerYLabel,
+                spectrometerXTickUnits,
+                spectrometerYTickUnits,
+                lineChartType.DEFAULT,
+                -1);
+            spectrometer.pack();
+        }
+    }//GEN-LAST:event_modulateButtonActionPerformed
 
     private boolean validateInput() {
         try {
@@ -1273,6 +1264,7 @@ public class Main extends javax.swing.JFrame {
     private boolean validateThreshold() {
         if (filteredSignal == null) {
             thresholdWarningLabel.setText("Please perform filtering.");
+            return false;
         }
         thresholdWarningLabel.setText(" ");
         return true;
@@ -1281,6 +1273,7 @@ public class Main extends javax.swing.JFrame {
     private boolean validateDecoding() {
         if (thresholdSignal == null) {
             thresholdWarningLabel.setText("Please perform thresholding.");
+            return false;
         }
         thresholdWarningLabel.setText(" ");
         return true;
@@ -1324,7 +1317,7 @@ public class Main extends javax.swing.JFrame {
             oscilloscope.setVisible(true);
             
             spectrometer = new LineChart("SPECTROMETER", 600, 320);
-            spectrometer.setLocation(700, 360);
+            spectrometer.setLocation(700, 400);
             spectrometer.setResizable(false);
             spectrometer.pack();
             spectrometer.setVisible(true);
@@ -1352,16 +1345,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton filterButton;
     private javax.swing.JTextField filterCutoffFreqHighTextField;
     private javax.swing.JTextField filterCutoffFreqLowTextField;
+    private javax.swing.JLabel filterLabel;
     private javax.swing.JPanel filterPanel;
     private javax.swing.JComboBox<String> filterTypeComboBox;
+    private javax.swing.JLabel filterTypeLabel;
     private javax.swing.JLabel filteringWarningLabel;
     private javax.swing.JButton impairmentButton;
     private javax.swing.JLabel impairmentLabel;
-    private javax.swing.JLabel impairmentLabel1;
     private javax.swing.JLabel impairmentLabel2;
     private javax.swing.JPanel impairmentPanel;
     private javax.swing.JLabel impairmentPowerLabel;
-    private javax.swing.JLabel impairmentPowerLabel1;
     private javax.swing.JTextField impairmentPowerTextField;
     private javax.swing.JComboBox<String> impairmentTypeComboBox;
     private javax.swing.JLabel impairmentWarningLabel;
