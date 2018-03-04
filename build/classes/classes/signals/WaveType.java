@@ -10,5 +10,5 @@ package classes.signals;
  * @author chidi
  */
 public enum WaveType {
-    SIN, COS, SQUARE, TRIANGULAR;
+    SIN, COS, SQUARE;
 }

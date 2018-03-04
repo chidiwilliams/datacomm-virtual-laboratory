@@ -101,7 +101,7 @@ public class SignalGenerator extends javax.swing.JFrame {
                             .addComponent(frequencyTextField))))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(91, 91, 91)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -138,7 +138,7 @@ public class SignalGenerator extends javax.swing.JFrame {
         for (int i = 0; i < samplingIntervals.length; i++) {
             samplingIntervals[i] = Math.pow(samples, -1) * i;
         }
-        
+                
         if (null != wavetype) switch (wavetype) {
             case "Sine wave":
                 waveSignal = new CarrierSignal(WaveType.SIN, samples, frequency, 0);
@@ -148,9 +148,6 @@ public class SignalGenerator extends javax.swing.JFrame {
                 break;
             case "Square wave":
                 waveSignal = new CarrierSignal(WaveType.SQUARE, samples, frequency, 0);
-                break;
-            case "Triangular wave":
-                waveSignal = new CarrierSignal(WaveType.TRIANGULAR, samples, frequency, 0);
                 break;
             default:
                 break;
