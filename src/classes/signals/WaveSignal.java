@@ -1,9 +1,7 @@
 package classes.signals;
 
-import java.util.Arrays;
-
-public class CarrierSignal extends Signal {
-    public CarrierSignal(WaveType wavetype, int samples, double frequency, double phase) {
+public class WaveSignal extends Signal {
+    public WaveSignal(WaveSignalType wavetype, int samples, double frequency, double phase) {
         super(samples);
         
         this.frequency = frequency;
@@ -14,7 +12,7 @@ public class CarrierSignal extends Signal {
     }
 
     private final double frequency;
-    private final WaveType wavetype;
+    private final WaveSignalType wavetype;
     private final double phase;
 
     public double getFrequency() {
@@ -45,16 +43,35 @@ public class CarrierSignal extends Signal {
                         }
                 }
                 break;
+            case TRIANGULAR:                
+                for (int i = 0; i < frequency; i++) {
+                    int start = (int) (i / frequency * 2048);
+                    
+                    int limit = (int) (2048 / frequency);
+                    int limit2 = (int) (2048 / (frequency * 2));
+                    int limit4 = (int) (2048 / (frequency * 4));
+                    
+                    for (int j = start; j < start + limit4; j++) {
+                        carrier[j] = (j - start) * Math.pow(limit4, -1);
+                    }
+                    
+                    for (int j = start + limit4; j < start + limit2; j++) {
+                        carrier[j] = (-1 * (j - (start + limit4)) * Math.pow(limit4, -1)) + 1;
+                    }
+                    
+                    for (int j = start + limit2; j < start + limit2 + limit4; j++) {
+                        carrier[j] = -1 * (j - (start + limit2)) * Math.pow(limit4, -1);
+                    }
+                    
+                    for (int j = start + limit2 + limit4; j < start + limit; j++) {
+                        carrier[j] = ((j - (start + limit2 + limit4)) * Math.pow(limit4, -1)) - 1;
+                    }
+                }
+                break;
             default:
                 throw new IllegalArgumentException();
         }
         
         this.setSignal(carrier);
-    }
-    
-    public static void main(String[] args) {
-        CarrierSignal carr = new CarrierSignal(WaveType.SQUARE, 2048, 8, 0);
-        
-        System.out.println(Arrays.toString(carr.getSignal()));
     }
 }

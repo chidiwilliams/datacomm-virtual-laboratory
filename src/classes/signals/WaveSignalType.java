@@ -9,6 +9,6 @@ package classes.signals;
  *
  * @author chidi
  */
-public enum WaveType {
+public enum WaveSignalType {
     SIN, COS, SQUARE, TRIANGULAR;
 }

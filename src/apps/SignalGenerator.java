@@ -9,8 +9,8 @@ package apps;
 
 import classes.charts.LineChart;
 import classes.helpers.SignalFFT;
-import classes.signals.CarrierSignal;
-import classes.signals.WaveType;
+import classes.signals.WaveSignal;
+import classes.signals.WaveSignalType;
 
 /**
  *
@@ -141,16 +141,16 @@ public class SignalGenerator extends javax.swing.JFrame {
         
         if (null != wavetype) switch (wavetype) {
             case "Sine wave":
-                waveSignal = new CarrierSignal(WaveType.SIN, samples, frequency, 0);
+                waveSignal = new WaveSignal(WaveSignalType.SIN, samples, frequency, 0);
                 break;
             case "Cosine wave":
-                waveSignal = new CarrierSignal(WaveType.COS, samples, frequency, 0);
+                waveSignal = new WaveSignal(WaveSignalType.COS, samples, frequency, 0);
                 break;
             case "Square wave":
-                waveSignal = new CarrierSignal(WaveType.SQUARE, samples, frequency, 0);
+                waveSignal = new WaveSignal(WaveSignalType.SQUARE, samples, frequency, 0);
                 break;
             case "Triangular wave":
-                waveSignal = new CarrierSignal(WaveType.TRIANGULAR, samples, frequency, 0);
+                waveSignal = new WaveSignal(WaveSignalType.TRIANGULAR, samples, frequency, 0);
                 break;
             default:
                 break;
@@ -254,7 +254,7 @@ public class SignalGenerator extends javax.swing.JFrame {
     private final double spectrometerXTickUnits = 8;
     private final double spectrometerYTickUnits = -1;
     
-    private CarrierSignal waveSignal;
+    private WaveSignal waveSignal;
     private final int samples = 2048;    
     private final double samplingFrequency = 2048;
     private double[] samplingIntervals = new double[2048];

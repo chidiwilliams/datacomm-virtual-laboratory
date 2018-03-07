@@ -5,8 +5,8 @@
  */
 package apps;
 
-import classes.signals.CarrierSignal;
-import classes.signals.WaveType;
+import classes.signals.WaveSignal;
+import classes.signals.WaveSignalType;
 import classes.signals.Signal;
 import classes.modulations.BPSK;
 import classes.modulations.QPSK;
@@ -861,7 +861,7 @@ public class MasterSimulator extends javax.swing.JFrame {
         if (validateCarrierGeneration()) {
             int frequency = Integer.parseInt(carrierFrequencyComboBox.getSelectedItem().toString());
 
-            carrierSignal = new CarrierSignal(WaveType.SIN, samples, frequency, 0);
+            carrierSignal = new WaveSignal(WaveSignalType.SIN, samples, frequency, 0);
 
 //          PLOT SAMPLES
             oscilloscope.sendData(
@@ -1142,8 +1142,8 @@ public class MasterSimulator extends javax.swing.JFrame {
                     bpsk.getModulated()
                 );
             } else if ("QPSK".equals(modulationScheme)) {
-                CarrierSignal carrier90Signal = new CarrierSignal(
-                        WaveType.COS, 
+                WaveSignal carrier90Signal = new WaveSignal(
+                        WaveSignalType.COS, 
                         samples, 
                         carrierSignal.getFrequency(), 
                         0
@@ -1400,7 +1400,7 @@ public class MasterSimulator extends javax.swing.JFrame {
     private Signal inputSignal;
     private Signal basebandSignal;
     private Signal messageSignal;
-    private CarrierSignal carrierSignal;
+    private WaveSignal carrierSignal;
     private Signal modulatedSignal;
     private Signal receivedSignal;
     private Signal demodulatedSignal;
