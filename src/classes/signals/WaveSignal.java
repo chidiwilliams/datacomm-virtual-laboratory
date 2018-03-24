@@ -67,6 +67,10 @@ public class WaveSignal extends Signal {
                         carrier[j] = ((j - (start + limit2 + limit4)) * Math.pow(limit4, -1)) - 1;
                     }
                 }
+                
+                for (int i = 0; i < carrier.length; i++) {
+                    System.out.println(carrier[i]);
+                }
                 break;
             default:
                 throw new IllegalArgumentException();

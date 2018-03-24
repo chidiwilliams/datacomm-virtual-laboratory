@@ -1,6 +1,7 @@
 
 import apps.ConvolutionalDesigner;
 import apps.MasterSimulator;
+import apps.SignalGenerator;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,7 +33,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         simulatorButton = new javax.swing.JButton();
-        Simulator2 = new javax.swing.JButton();
+        genButton = new javax.swing.JButton();
         convolutionalButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +45,12 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        Simulator2.setText("Signal generator");
+        genButton.setText("Signal generator");
+        genButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genButtonActionPerformed(evt);
+            }
+        });
 
         convolutionalButton.setText("Convolutional codec");
         convolutionalButton.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +67,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(convolutionalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Simulator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genButton, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(simulatorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -73,7 +79,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(simulatorButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Simulator2)
+                .addComponent(genButton)
                 .addGap(91, 91, 91))
         );
 
@@ -88,7 +94,17 @@ public class Main extends javax.swing.JFrame {
 
     private void simulatorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulatorButtonActionPerformed
         MasterSimulator sim = new MasterSimulator();
+        sim.setVisible(true);
+        sim.setDefaultCloseOperation(1);
+        
+        sim.drawCharts();
     }//GEN-LAST:event_simulatorButtonActionPerformed
+
+    private void genButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genButtonActionPerformed
+        SignalGenerator gen = new SignalGenerator();
+        gen.setVisible(true);
+        gen.setDefaultCloseOperation(1);
+    }//GEN-LAST:event_genButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,16 +134,14 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Main().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Main().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Simulator2;
     private javax.swing.JButton convolutionalButton;
+    private javax.swing.JButton genButton;
     private javax.swing.JButton simulatorButton;
     // End of variables declaration//GEN-END:variables
 }

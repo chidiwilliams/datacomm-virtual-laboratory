@@ -1,8 +1,6 @@
 package classes.impairments;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -58,7 +56,7 @@ public class AWGN {
     }
 
     public double[] readNoise(String filepath, int samples) {
-        String filename = (filepath.equals("")) ? "./src/simulator/other/noise.txt" : filepath;
+        String filename = (filepath.equals("")) ? "./src/other/noise.txt" : filepath;
         ArrayList<Double> samplesList = new ArrayList<>();
         double[] op = new double[samples];
         String line;

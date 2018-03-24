@@ -27,7 +27,7 @@
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="convolutionalButton" min="-2" pref="287" max="-2" attributes="0"/>
-                  <Component id="Simulator2" min="-2" pref="287" max="-2" attributes="0"/>
+                  <Component id="genButton" min="-2" pref="287" max="-2" attributes="0"/>
                   <Component id="simulatorButton" min="-2" pref="287" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="59" max="32767" attributes="0"/>
@@ -42,7 +42,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="simulatorButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="Simulator2" min="-2" max="-2" attributes="0"/>
+              <Component id="genButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -57,10 +57,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simulatorButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Simulator2">
+    <Component class="javax.swing.JButton" name="genButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Signal generator"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="convolutionalButton">
       <Properties>

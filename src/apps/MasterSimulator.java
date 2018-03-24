@@ -18,6 +18,7 @@ import classes.filters.BPF;
 import classes.charts.LineChart;
 import classes.impairments.AWGN;
 import classes.codingSchemes.Hamming;
+import classes.modulations.QAM_8;
 
 /**
  *
@@ -409,7 +410,7 @@ public class MasterSimulator extends javax.swing.JFrame {
         codingSchemeLabel1.setText("Modulation Scheme");
 
         modulationSchemeComboBox.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
-        modulationSchemeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BPSK", "QPSK" }));
+        modulationSchemeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BPSK", "QPSK", "8-QAM" }));
 
         modulateButton.setFont(new java.awt.Font("Ubuntu", 0, 16)); // NOI18N
         modulateButton.setText("Modulate");
@@ -723,7 +724,7 @@ public class MasterSimulator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(carrierPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(modulationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(modulationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(49, 49, 49))
         );
 
@@ -896,8 +897,6 @@ public class MasterSimulator extends javax.swing.JFrame {
             if ("AWGN".equals(impairmentType)) {
                 double impairmentPower = Double.parseDouble(impairmentPowerTextField.getText());
 
-                System.out.println(impairmentPower);
-
                 noise.readNoise("", samples);
                 double[] impairment_values = noise.setAmplitude(impairmentPower);
                 double[] mod_plus_impairment = ArrayFunctions.add(modulatedSignal.getSignal(), impairment_values);
@@ -1018,9 +1017,24 @@ public class MasterSimulator extends javax.swing.JFrame {
     }//GEN-LAST:event_thresholdButtonActionPerformed
 
     private void demodulateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demodulateButtonActionPerformed
+        String modulationScheme = modulationSchemeComboBox.getSelectedItem().toString();
+
         if (validateDemodulation()) {
             demodulatedSignal = new Signal(samples);
-            demodulatedSignal.setSignal(bpsk.getDemodulated(receivedSignal.getSignal()));
+            
+            if (null != modulationScheme) switch (modulationScheme) {
+                case "BPSK":
+                    demodulatedSignal.setSignal(bpsk.getDemodulated(receivedSignal.getSignal()));
+                    break;
+                case "QPSK":
+                    demodulatedSignal.setSignal(qpsk.getDemodulated(receivedSignal.getSignal()));
+                    break;
+                case "8-QAM":
+                    demodulatedSignal.setSignal(qam_8.getDemodulated(receivedSignal.getSignal()));
+                    break;
+                default:
+                    break;
+            }
             
             //          PLOT SAMPLES
             oscilloscope.sendData(
@@ -1135,25 +1149,30 @@ public class MasterSimulator extends javax.swing.JFrame {
         if (validateModulation()) {
             modulatedSignal = new Signal(samples);
             
-            if ("BPSK".equals(modulationScheme)) {
-                bpsk = new BPSK(messageSignal.getSignal(), carrierSignal.getSignal());
-
-                modulatedSignal.setSignal(
-                    bpsk.getModulated()
-                );
-            } else if ("QPSK".equals(modulationScheme)) {
-                WaveSignal carrier90Signal = new WaveSignal(
-                        WaveSignalType.COS, 
-                        samples, 
-                        carrierSignal.getFrequency(), 
-                        0
-                );
-                
-                qpsk = new QPSK(basebandSignal.getSignal(), carrierSignal.getSignal(), carrier90Signal.getSignal());
-                
-                modulatedSignal.setSignal(
-                        qpsk.getModulated()
-                );
+            if (null != modulationScheme) switch (modulationScheme) {
+                case "BPSK":
+                    bpsk = new BPSK(messageSignal.getSignal(), carrierSignal.getSignal());
+                    modulatedSignal.setSignal(
+                            bpsk.getModulated()
+                    );  break;
+                case "QPSK":
+                    WaveSignal carrier90Signal = new WaveSignal(
+                            WaveSignalType.COS,
+                            samples,
+                            carrierSignal.getFrequency(),
+                            0
+                    );  qpsk = new QPSK(basebandSignal.getSignal(), carrierSignal.getSignal(), carrier90Signal.getSignal());
+                    modulatedSignal.setSignal(
+                            qpsk.getModulated()
+                    );  break;
+                case "8-QAM":
+                    qam_8 = new QAM_8(basebandSignal.getSignal(), samples);
+                    modulatedSignal.setSignal(
+                            qam_8.getModulated()
+                    );
+                    break;
+                default:
+                    break;
             }
 
             //          PLOT SAMPLES
@@ -1295,6 +1314,20 @@ public class MasterSimulator extends javax.swing.JFrame {
         return true;
     }
     
+    public void drawCharts() {
+        oscilloscope = new LineChart("OSCILLOSCOPE", 600, 320);
+        oscilloscope.setLocation(700, 0);
+        oscilloscope.setResizable(false);
+        oscilloscope.pack();
+        oscilloscope.setVisible(true);
+
+        spectrometer = new LineChart("SPECTROMETER", 600, 320);
+        spectrometer.setLocation(700, 400);
+        spectrometer.setResizable(false);
+        spectrometer.pack();
+        spectrometer.setVisible(true);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1321,19 +1354,10 @@ public class MasterSimulator extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MasterSimulator().setVisible(true);
+            MasterSimulator mas = new MasterSimulator();
             
-            oscilloscope = new LineChart("OSCILLOSCOPE", 600, 320);
-            oscilloscope.setLocation(700, 0);
-            oscilloscope.setResizable(false);
-            oscilloscope.pack();
-            oscilloscope.setVisible(true);
-            
-            spectrometer = new LineChart("SPECTROMETER", 600, 320);
-            spectrometer.setLocation(700, 400);
-            spectrometer.setResizable(false);
-            spectrometer.pack();
-            spectrometer.setVisible(true);
+            mas.setVisible(true);
+            mas.drawCharts();
         });
     }
 
@@ -1410,6 +1434,7 @@ public class MasterSimulator extends javax.swing.JFrame {
     
     private BPSK bpsk;
     private QPSK qpsk;
+    private QAM_8 qam_8;
     private final AWGN noise = new AWGN();
     private double[] filtered;
     private LPF lpFilter;
