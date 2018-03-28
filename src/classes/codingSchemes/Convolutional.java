@@ -194,7 +194,7 @@ public class Convolutional {
             System.arraycopy(saved_state, 0, this.state, 0, this.state.length);
         }
         
-        int min_weight = 99999999;
+        int min_weight = weights[0];
         int min_position = 0;
         for (int i = 0; i < weights.length; i++) {
             if (weights[i] < min_weight) {

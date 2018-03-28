@@ -19,6 +19,7 @@ import classes.charts.LineChart;
 import classes.impairments.AWGN;
 import classes.codingSchemes.Hamming;
 import classes.modulations.QAM_8;
+import java.util.Arrays;
 
 /**
  *
@@ -928,8 +929,8 @@ public class MasterSimulator extends javax.swing.JFrame {
                 spectrometerYTickUnits,
                 -1);
             spectrometer.pack();
+            
         }
-
     }//GEN-LAST:event_impairmentButtonActionPerformed
 
     private void decodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decodeButtonActionPerformed
@@ -1149,30 +1150,32 @@ public class MasterSimulator extends javax.swing.JFrame {
         if (validateModulation()) {
             modulatedSignal = new Signal(samples);
             
-            if (null != modulationScheme) switch (modulationScheme) {
-                case "BPSK":
-                    bpsk = new BPSK(messageSignal.getSignal(), carrierSignal.getSignal());
-                    modulatedSignal.setSignal(
-                            bpsk.getModulated()
-                    );  break;
-                case "QPSK":
-                    WaveSignal carrier90Signal = new WaveSignal(
-                            WaveSignalType.COS,
-                            samples,
-                            carrierSignal.getFrequency(),
-                            0
-                    );  qpsk = new QPSK(basebandSignal.getSignal(), carrierSignal.getSignal(), carrier90Signal.getSignal());
-                    modulatedSignal.setSignal(
-                            qpsk.getModulated()
-                    );  break;
-                case "8-QAM":
-                    qam_8 = new QAM_8(basebandSignal.getSignal(), samples);
-                    modulatedSignal.setSignal(
-                            qam_8.getModulated()
-                    );
-                    break;
-                default:
-                    break;
+            if (null != modulationScheme) {
+                switch (modulationScheme) {
+                    case "BPSK":
+                        bpsk = new BPSK(messageSignal.getSignal(), carrierSignal.getSignal());
+                        modulatedSignal.setSignal(
+                                bpsk.getModulated()
+                        );  break;
+                    case "QPSK":
+                        WaveSignal carrier90Signal = new WaveSignal(
+                                WaveSignalType.COS,
+                                samples,
+                                carrierSignal.getFrequency(),
+                                0
+                        );  qpsk = new QPSK(basebandSignal.getSignal(), carrierSignal.getSignal(), carrier90Signal.getSignal());
+                        modulatedSignal.setSignal(
+                                qpsk.getModulated()
+                        );  break;
+                    case "8-QAM":
+                        qam_8 = new QAM_8(basebandSignal.getSignal(), samples);
+                        modulatedSignal.setSignal(
+                                qam_8.getModulated()
+                        );
+                        break;
+                    default:
+                        break;
+                }
             }
 
             //          PLOT SAMPLES
@@ -1198,6 +1201,10 @@ public class MasterSimulator extends javax.swing.JFrame {
                 spectrometerYTickUnits,
                 -1);
             spectrometer.pack();
+            
+            for (int i = 0; i < 64; i++) {
+                System.out.println(modulatedFFT.getSingleSidedSpectrumToMax(100)[i]);
+            }
         }
     }//GEN-LAST:event_modulateButtonActionPerformed
 

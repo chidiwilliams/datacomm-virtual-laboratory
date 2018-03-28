@@ -69,7 +69,7 @@ public class LineChart extends ApplicationFrame {
         }
         
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        renderer.setSeriesPaint(0, Color.BLACK);
+        renderer.setSeriesPaint(0, Color.RED);
         renderer.setSeriesShapesVisible(0, false);
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(new Color(230, 230, 230));

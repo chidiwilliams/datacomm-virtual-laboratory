@@ -14,6 +14,8 @@ import classes.helpers.ArrayFunctions;
  */
 public class ConvolutionalDesigner extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form Main
      */
