@@ -109,10 +109,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="filterPanel" alignment="1" pref="342" max="32767" attributes="0"/>
+                          <Component id="filterPanel" alignment="1" pref="341" max="32767" attributes="0"/>
                           <Component id="impairmentPanel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="domainPanel" pref="342" max="32767" attributes="0"/>
-                          <Component id="decodePanel" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="domainPanel" pref="341" max="32767" attributes="0"/>
+                          <Component id="decodePanel" alignment="0" pref="341" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   </Group>
@@ -138,7 +138,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="carrierPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="modulationPanel" pref="0" max="32767" attributes="0"/>
+                              <Component id="modulationPanel" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
@@ -430,7 +430,7 @@
                                   <Component id="decodeButton" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="21" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -448,7 +448,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="successLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="19" max="32767" attributes="0"/>
+                          <EmptySpace pref="18" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -912,7 +912,7 @@
                                               <Component id="codingSchemeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="sampleNoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="44" pref="36" max="32767" attributes="0"/>
+                                          <EmptySpace min="44" pref="53" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="sampleNoComboBox" max="32767" attributes="0"/>
                                               <Component id="codingSchemeComboBox" max="32767" attributes="0"/>

@@ -5,7 +5,6 @@
  */
 package simulator.classes.charts;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartFactory;

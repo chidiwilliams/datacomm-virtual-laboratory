@@ -19,13 +19,14 @@ import classes.charts.LineChart;
 import classes.impairments.AWGN;
 import classes.codingSchemes.Hamming;
 import classes.modulations.QAM_8;
-import java.util.Arrays;
 
 /**
  *
  * @author HP
  */
 public class MasterSimulator extends javax.swing.JFrame {
+
+    private static final long serialVersionUID = 1L;
     /**
      * Creates new form Main
      */
@@ -1023,18 +1024,20 @@ public class MasterSimulator extends javax.swing.JFrame {
         if (validateDemodulation()) {
             demodulatedSignal = new Signal(samples);
             
-            if (null != modulationScheme) switch (modulationScheme) {
-                case "BPSK":
-                    demodulatedSignal.setSignal(bpsk.getDemodulated(receivedSignal.getSignal()));
-                    break;
-                case "QPSK":
-                    demodulatedSignal.setSignal(qpsk.getDemodulated(receivedSignal.getSignal()));
-                    break;
-                case "8-QAM":
-                    demodulatedSignal.setSignal(qam_8.getDemodulated(receivedSignal.getSignal()));
-                    break;
-                default:
-                    break;
+            if (null != modulationScheme) {
+                switch (modulationScheme) {
+                    case "BPSK":
+                        demodulatedSignal.setSignal(bpsk.getDemodulated(receivedSignal.getSignal()));
+                        break;
+                    case "QPSK":
+                        demodulatedSignal.setSignal(qpsk.getDemodulated(receivedSignal.getSignal()));
+                        break;
+                    case "8-QAM":
+                        demodulatedSignal.setSignal(qam_8.getDemodulated(receivedSignal.getSignal()));
+                        break;
+                    default:
+                        break;
+                }
             }
             
             //          PLOT SAMPLES

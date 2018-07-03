@@ -24,6 +24,8 @@ import org.jfree.data.xy.XYSeriesCollection;
  * @author HP
  */
 public class LineChart extends ApplicationFrame {
+
+    private static final long serialVersionUID = 1L;
     public LineChart(String applicationTitle, Integer width, Integer height) {
         super(applicationTitle);
         
